@@ -1,0 +1,65 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "lumu-reviews": {
+      "type": "lumu-reviews",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "footer-brand": {
+          "type": "brand_information",
+          "settings": {
+            "description": "Your trusted online marketplace. Quality products, best prices, and fast delivery across Pakistan."
+          }
+        },
+        "footer-shop": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "main-menu"
+          }
+        },
+        "footer-help": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "footer"
+          }
+        },
+        "footer-info": {
+          "type": "text",
+          "settings": {
+            "heading": "Contact Us",
+            "subtext": "<p>support@lumu.pk<br>WhatsApp: +92 XXX XXXXXXX<br>Lahore, Pakistan<br>Mon-Sat: 9AM - 9PM</p>"
+          }
+        }
+      },
+      "block_order": [
+        "footer-brand",
+        "footer-shop",
+        "footer-help",
+        "footer-info"
+      ],
+      "settings": {
+        "color_scheme": "scheme-4",
+        "newsletter_enable": true,
+        "newsletter_heading": "Get Exclusive Deals & Updates",
+        "show_social": true,
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "payment_enable": true,
+        "show_policy": true,
+        "margin_top": 0,
+        "padding_top": 48,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "lumu-reviews",
+    "footer"
+  ]
+}

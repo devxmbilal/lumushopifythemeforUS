@@ -1,0 +1,115 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'lumu-custom.css' | asset_url | stylesheet_tag }}
+
+<div class="lumu-auth-container">
+  <a href="{{ routes.root_url }}">
+    <img src="{{ 'lumu2.png' | asset_img_url: '300x' }}" alt="{{ shop.name }}" class="lumu-auth-logo">
+  </a>
+
+  <!-- RECOVER PASSWORD FORM -->
+  <div id="recover" class="recover-form">
+    <h1 class="lumu-auth-title">{{ 'customer.recover_password.title' | t }}</h1>
+    <p style="color: #666; margin-bottom: 25px;">{{ 'customer.recover_password.subtext' | t }}</p>
+
+    {%- form 'recover_customer_password' -%}
+      {% assign recover_success = form.posted_successfully? %}
+      <div class="lumu-auth-field">
+        <label for="RecoverEmail">{{ 'customer.login_page.email' | t }}</label>
+        <input
+          type="email"
+          value=""
+          name="email"
+          id="RecoverEmail"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+      
+      {%- if form.errors -%}
+        <div style="color: red; margin-bottom: 15px; font-size: 14px;">
+          {{ form.errors.messages.form }}
+        </div>
+      {%- endif -%}
+
+      <button type="submit" class="lumu-auth-btn">
+        {{ 'customer.login_page.submit' | t }}
+      </button>
+
+      <div class="lumu-auth-footer">
+        <a href="#login">Cancel</a>
+      </div>
+    {%- endform -%}
+  </div>
+
+  <!-- LOGIN FORM -->
+  <div id="login" class="login-form">
+    <h1 class="lumu-auth-title">Sign in to Lumu</h1>
+    
+    {%- if recover_success == true -%}
+      <div style="color: green; background: #edfaed; padding: 10px; border-radius: 8px; margin-bottom: 20px;">
+        {{ 'customer.recover_password.success' | t }}
+      </div>
+    {%- endif -%}
+
+    {%- form 'customer_login', novalidate: 'novalidate' -%}
+      {%- if form.errors -%}
+        <div style="color: red; background: #faeded; padding: 10px; border-radius: 8px; margin-bottom: 20px; font-size: 14px;">
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <div class="lumu-auth-field">
+        <label for="CustomerEmail">Email</label>
+        <input
+          type="email"
+          name="customer[email]"
+          id="CustomerEmail"
+          autocomplete="email"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="name@example.com"
+          required
+        >
+      </div>
+
+      {%- if form.password_needed -%}
+        <div class="lumu-auth-field" style="margin-bottom: 10px;">
+          <label for="CustomerPassword">Password</label>
+          <input
+            type="password"
+            value=""
+            name="customer[password]"
+            id="CustomerPassword"
+            autocomplete="current-password"
+            placeholder="Enter your password"
+            required
+          >
+        </div>
+
+        <div style="text-align: right; margin-bottom: 20px;">
+          <a href="#recover" style="font-size: 13px; color: #6153a7; text-decoration: none; font-weight: 500;">
+            Forgot your password?
+          </a>
+        </div>
+      {%- endif -%}
+
+      <button type="submit" class="lumu-auth-btn">
+        Sign in
+      </button>
+
+      <div class="lumu-auth-footer">
+        Don't have an account? <a href="{{ routes.account_register_url }}">Create one</a>
+      </div>
+    {%- endform -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-login.name",
+  "settings": []
+}
+{% endschema %}

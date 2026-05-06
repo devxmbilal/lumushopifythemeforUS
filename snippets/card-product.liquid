@@ -1,0 +1,82 @@
+{% comment %}
+  Renders a premium Lumu product card
+  Inherits custom styles from lumu-custom.css and the premium trending classes
+{% endcomment %}
+{%- if card_product and card_product != empty -%}
+<div class="card-wrapper product-card-wrapper" style="height: 100%;">
+  <a href="{{ card_product.url }}" class="card lumu-pfp__card">
+    <div class="lumu-pfp__card-img-wrap card__inner">
+      {%- if card_product.featured_media -%}
+        <!-- Force 1:1 Aspect Ratio constraint globally to fix oversized tall images -->
+        <img src="{{ card_product.featured_media | image_url: width: 600, height: 600, crop: 'center' }}" alt="{{ card_product.title | escape }}" class="lumu-pfp__card-img" loading="lazy">
+      {%- else -%}
+        <div class="lumu-pfp__card-img" style="background:#f9f9fb;"></div>
+      {%- endif -%}
+
+      <!-- Global Sales Badges Overlay -->
+      <div class="card__badge">
+        {%- if card_product.available == false -%}
+          <span class="badge badge--bottom-left" style="background:#111827; color:white;">Sold Out</span>
+        {%- elsif card_product.compare_at_price > card_product.price and card_product.available -%}
+          <span class="badge badge--bottom-left" style="background:#d32f2f; color:white;">Sale</span>
+        {%- endif -%}
+      </div>
+    </div>
+    
+    <div class="lumu-pfp__card-body card__content">
+      <!-- Universal Star Reviews -->
+      <div class="lumu-pfp__reviews">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <span style="color: var(--lumu-dark, #0f172a); font-size: 1.2rem; opacity: 0.7; margin-left: 2px;">(4.9)</span>
+      </div>
+      
+      <!-- Exact Title Class -->
+      <div class="lumu-pfp__card-name card__heading">{{ card_product.title | escape }}</div>
+      
+      <!-- Premium Pricing Override -->
+      <div class="lumu-pfp__card-price price">
+        {{ card_product.price | money }}
+        {%- if card_product.compare_at_price > card_product.price -%}
+          <s>{{ card_product.compare_at_price | money }}</s>
+        {%- endif -%}
+      </div>
+      
+      <!-- Functional Add to Cart Hook -->
+      <div style="margin-top: auto; width: 100%;">
+        {%- if card_product.available -%}
+          <!-- Prevent default link click on button to add to cart -->
+          <form method="post" action="/cart/add" class="product-form" onclick="event.preventDefault(); this.submit();">
+            <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="lumu-pfp__atc-btn" style="width:100%;">
+              Add to Cart
+            </button>
+          </form>
+        {%- else -%}
+          <button disabled class="lumu-pfp__atc-btn" style="background:#f1f1f1; border-color:#e0e0e0; color:#888; cursor:not-allowed; width: 100%; border:none;">
+            Out of Stock
+          </button>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </a>
+</div>
+{%- else -%}
+<!-- Placeholder for missing products -->
+<div class="card-wrapper product-card-wrapper" style="height: 100%;">
+  <div class="card lumu-pfp__card">
+    <div class="lumu-pfp__card-img-wrap card__inner">
+      <div class="lumu-pfp__card-img" style="background:#f9f9fb;"></div>
+    </div>
+    <div class="lumu-pfp__card-body card__content">
+      <div class="lumu-pfp__card-name card__heading">Example Product Detail</div>
+      <div class="lumu-pfp__card-price price">$99.99</div>
+      <div class="lumu-pfp__atc-btn">Add to Cart</div>
+    </div>
+  </div>
+</div>
+{%- endif -%}

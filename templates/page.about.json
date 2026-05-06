@@ -1,0 +1,126 @@
+{
+  "sections": {
+    "lumu_about_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "About Lumu",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Pakistan's trusted online marketplace — delivering quality, variety, and value since day one.",
+            "text_style": "subtitle"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "image_height": "small",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "mobile_content_alignment": "center"
+      }
+    },
+    "lumu_our_story": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Story",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Welcome to <strong>LUMU</strong> - a revolutionary, large-scale e-commerce marketplace tailored to the evolving needs of consumers. With an extensive range of over 30+ product categories, LUMU is designed to serve every segment of society - from budget-conscious families to quality-seeking premium buyers.</p><p>At LUMU, we believe in bridging the gap between affordability and quality. By streamlining our supply chain and sourcing directly from manufacturers, we ensure that premium products are accessible at prices that make sense. From fashion and electronics to home essentials, everything you need is just a click away.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "height": "auto",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "lumu_values": {
+      "type": "multicolumn",
+      "blocks": {
+        "v_1": { "type": "column", "settings": { "title": "🎯 Quality First", "text": "<p>Every product is vetted for quality before it reaches your doorstep. No compromises, ever.</p>" } },
+        "v_2": { "type": "column", "settings": { "title": "💰 Best Prices", "text": "<p>We cut out the middlemen and pass the savings directly to you. Great value, guaranteed.</p>" } },
+        "v_3": { "type": "column", "settings": { "title": "🤝 Customer Love", "text": "<p>From order to delivery, our support team is here 24/7 to ensure your complete satisfaction.</p>" } }
+      },
+      "block_order": ["v_1", "v_2", "v_3"],
+      "settings": {
+        "title": "What We Stand For",
+        "heading_size": "h1",
+        "columns_desktop": 3,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    },
+    "lumu_about_cta": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Start Shopping?",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Join thousands of happy customers across Pakistan. Browse our collections and find something you love today.</p>"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Explore Collections",
+            "button_link": "shopify://collections",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "full_width": true,
+        "padding_top": 52,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "lumu_about_banner",
+    "lumu_our_story",
+    "lumu_values",
+    "lumu_about_cta"
+  ]
+}
