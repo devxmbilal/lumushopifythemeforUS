@@ -1800,19 +1800,31 @@ details-modal.header__search {
   position: relative;
 }
 
-.header__inline-menu .header__menu-item span::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 0;
-  background-color: var(--lumu-purple);
-  transition: width 0.3s ease;
+/* Remove ALL underlines / hover lines on navbar and dropdown menu items */
+.header__inline-menu .header__menu-item span::after,
+.header__inline-menu .header__menu-item:hover span::after,
+.header__menu-item span::after,
+.header__menu-item:hover span::after,
+.header__menu-item::after,
+.header__menu-item:hover::after {
+  display: none !important;
+  content: none !important;
+  width: 0 !important;
 }
 
-.header__inline-menu .header__menu-item:hover span::after {
-  width: 100%;
+.header__inline-menu .header__menu-item,
+.header__inline-menu .header__menu-item:hover,
+.header__menu-item,
+.header__menu-item:hover,
+.header__menu-item span,
+.header__menu-item:hover span,
+.list-menu__item,
+.list-menu__item:hover,
+.list-menu__item span,
+.list-menu__item:hover span {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 /* Dropdown Premium Styling */
@@ -3582,7 +3594,12 @@ media-gallery {
   letter-spacing: -0.03em !important;
   display: flex !important;
   align-items: center !important;
+  justify-content: flex-start !important; /* Left-aligned! */
   margin-bottom: 15px !important;
+}
+
+.product__info-wrapper .price {
+  justify-content: flex-start !important; /* Force left-align on product page */
 }
 
 .price--large .price-item--regular,
