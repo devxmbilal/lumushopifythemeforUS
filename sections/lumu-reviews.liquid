@@ -65,52 +65,139 @@
 <div class="lumu-reviews">
   <div class="lumu-reviews__inner">
     <div class="lumu-reviews__header">
-      <h2 class="lumu-reviews__title">What Our Customers Say</h2>
+      <h2 class="lumu-reviews__title">{{ section.settings.title | default: "What Our Customers Say" }}</h2>
     </div>
     <div class="lumu-reviews__grid">
-      <!-- Review 1 -->
-      <div class="lumu-reviews__card">
-        <div class="lumu-reviews__stars">★★★★★</div>
-        <div class="lumu-reviews__text">"Absolutely love the quality! My order arrived in Lahore within 2 days. The packaging was beautiful and the product exceeded my expectations."</div>
-        <div class="lumu-reviews__author">Ayesha K.</div>
-        <div class="lumu-reviews__verified">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Verified Buyer
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="lumu-reviews__card" {{ block.shopify_attributes }}>
+            <div class="lumu-reviews__stars">
+              {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+            </div>
+            <div class="lumu-reviews__text">{{ block.settings.text }}</div>
+            <div class="lumu-reviews__author">{{ block.settings.author }}</div>
+            {%- if block.settings.verified -%}
+              <div class="lumu-reviews__verified">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                Verified Buyer
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback static localized reviews -->
+        <div class="lumu-reviews__card">
+          <div class="lumu-reviews__stars">★★★★★</div>
+          <div class="lumu-reviews__text">"Absolutely love the quality! My order arrived in Chicago within 2 days. The packaging was beautiful and the product exceeded my expectations."</div>
+          <div class="lumu-reviews__author">Emily R.</div>
+          <div class="lumu-reviews__verified">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Verified Buyer
+          </div>
         </div>
-      </div>
-      <!-- Review 2 -->
-      <div class="lumu-reviews__card">
-        <div class="lumu-reviews__stars">★★★★★</div>
-        <div class="lumu-reviews__text">"First time shopping at Lumu and I'm very impressed. The customer support team was super helpful on WhatsApp when I wanted to change my color preference."</div>
-        <div class="lumu-reviews__author">Usman M.</div>
-        <div class="lumu-reviews__verified">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Verified Buyer
+        <div class="lumu-reviews__card">
+          <div class="lumu-reviews__stars">★★★★★</div>
+          <div class="lumu-reviews__text">"First time shopping at Lumu and I'm very impressed. The customer support team was super helpful when I wanted to change my color preference."</div>
+          <div class="lumu-reviews__author">James L.</div>
+          <div class="lumu-reviews__verified">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Verified Buyer
+          </div>
         </div>
-      </div>
-      <!-- Review 3 -->
-      <div class="lumu-reviews__card">
-        <div class="lumu-reviews__stars">★★★★★</div>
-        <div class="lumu-reviews__text">"The premium feel of the tech gadgets I ordered is unmatched for this price. Definitely recommending to all my friends and family."</div>
-        <div class="lumu-reviews__author">Zainab T.</div>
-        <div class="lumu-reviews__verified">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-          Verified Buyer
+        <div class="lumu-reviews__card">
+          <div class="lumu-reviews__stars">★★★★★</div>
+          <div class="lumu-reviews__text">"The premium feel of the tech gadgets I ordered is unmatched for this price. Definitely recommending to all my friends and family."</div>
+          <div class="lumu-reviews__author">Sophia M.</div>
+          <div class="lumu-reviews__verified">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+            Verified Buyer
+          </div>
         </div>
-      </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Lumu Customer Reviews",
+  "name": "Lumu Reviews",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "What Our Customers Say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "\"Absolutely love the quality! My order arrived in Chicago within 2 days. The packaging was beautiful and the product exceeded my expectations.\""
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Emily R."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Buyer",
+          "default": true
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Customer Reviews"
+      "name": "Lumu Reviews",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "text": "\"Absolutely love the quality! My order arrived in Chicago within 2 days. The packaging was beautiful and the product exceeded my expectations.\"",
+            "author": "Emily R.",
+            "verified": true
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "text": "\"First time shopping at Lumu and I'm very impressed. The customer support team was super helpful when I wanted to change my color preference.\"",
+            "author": "James L.",
+            "verified": true
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "rating": 5,
+            "text": "\"The premium feel of the tech gadgets I ordered is unmatched for this price. Definitely recommending to all my friends and family.\"",
+            "author": "Sophia M.",
+            "verified": true
+          }
+        }
+      ]
     }
   ]
 }

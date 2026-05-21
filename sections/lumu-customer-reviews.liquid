@@ -150,134 +150,152 @@
 <div class="lumu-reviews-section">
   <div class="page-width">
     <div class="lumu-reviews-header">
-      <h2>Loved by Thousands of Women</h2>
-      <p>Discover why Lumu is the top choice for Premium Fashion & Kids Essentials in the UK & EU</p>
+      <h2>{{ section.settings.title | default: "Loved by Thousands of Women" }}</h2>
+      <p>{{ section.settings.subtitle | default: "Discover why Lumu is the top choice for Premium Fashion & Kids Essentials in the US" }}</p>
     </div>
   </div>
 
   <!-- Row 1: Left to Right Scroll -->
   <div class="lumu-reviews-wrapper" style="margin-bottom: 24px;">
     {%- capture review_track_1 -%}
-      <!-- Card 1 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"The kids' collection is unbelievably soft! My daughter loves her new dresses. Seamless delivery across the UK too."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">E</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Emily S.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row == 'row_1' -%}
+            <div class="lumu-review-card" {{ block.shopify_attributes }}>
+              <div class="lumu-review-stars">
+                {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+              </div>
+              <div class="lumu-review-text">{{ block.settings.text }}</div>
+              <div class="lumu-review-footer">
+                <div class="lumu-review-avatar">{{ block.settings.author | slice: 0 | upcase }}</div>
+                <div class="lumu-review-author-info">
+                  <span class="lumu-review-author">{{ block.settings.author }}</span>
+                  {%- if block.settings.verified -%}
+                    <span class="lumu-review-buyer">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      Verified Buyer
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback cards for Row 1 -->
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"The kids' collection is unbelievably soft! My daughter loves her new dresses. Seamless delivery across the US too."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">E</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Emily S.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 2 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Found the perfect handbag for my office wear. The quality is absolute premium and it arrived in London in just 2 days!"</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">S</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Sophie C.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Found the perfect handbag for my office wear. The quality is absolute premium and it arrived in Boston in just 2 days!"</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">S</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Sophie C.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 3 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"I ordered matching outfits for my twins, and they are gorgeous. The fabric is amazing for their sensitive skin. Will definitely order from Lumu again."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">C</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Chloe M.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"I ordered matching outfits for my twins, and they are gorgeous. The fabric is amazing for their sensitive skin. Will definitely order from Lumu again."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">C</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Chloe M.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 4 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"The jewelry pieces I bought are exactly as shown in the pictures. So elegant and perfect for everyday wear!"</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">O</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Olivia H.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"The jewelry pieces I bought are exactly as shown in the pictures. So elegant and perfect for everyday wear!"</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">O</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Olivia H.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 5 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Honestly, the best online shopping experience in the UK. My son's toys and clothes are top notch and durable."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">I</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Isabella T.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Honestly, the best online shopping experience in the US. My son's toys and clothes are top notch and durable."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">I</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Isabella T.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 6 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Got a stunning evening dress for a wedding. The fit is perfect and material is truly luxurious. Thank you Lumu!"</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">M</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Mia R.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Got a stunning evening dress for a wedding. The fit is perfect and material is truly luxurious. Thank you Lumu!"</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">M</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Mia R.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 7 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"As a working mum, I need quick deliveries. Lumu brought my baby's essentials exactly on time. Highly recommend."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">A</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Amelia B.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"As a working mum, I need quick deliveries. Lumu brought my baby's essentials exactly on time. Highly recommend."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">A</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Amelia B.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 8 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Amazing premium makeup organizers. Transformed my vanity completely! The acrylic is thick and beautiful."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">G</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Grace L.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Amazing premium makeup organizers. Transformed my vanity completely! The acrylic is thick and beautiful."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">G</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Grace L.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      {%- endif -%}
     {%- endcapture -%}
     
     <div class="lumu-marquee-track">
@@ -291,126 +309,144 @@
   <!-- Row 2: Right to Left Scroll -->
   <div class="lumu-reviews-wrapper">
     {%- capture review_track_2 -%}
-      <!-- Card 9 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"The girls' fashion section is adorable! My 5-year old is obsessed with her new sparkly shoes."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">L</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Lily W.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.settings.row == 'row_2' -%}
+            <div class="lumu-review-card" {{ block.shopify_attributes }}>
+              <div class="lumu-review-stars">
+                {%- for i in (1..block.settings.rating) -%}★{%- endfor -%}
+              </div>
+              <div class="lumu-review-text">{{ block.settings.text }}</div>
+              <div class="lumu-review-footer">
+                <div class="lumu-review-avatar">{{ block.settings.author | slice: 0 | upcase }}</div>
+                <div class="lumu-review-author-info">
+                  <span class="lumu-review-author">{{ block.settings.author }}</span>
+                  {%- if block.settings.verified -%}
+                    <span class="lumu-review-buyer">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                      Verified Buyer
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback cards for Row 2 -->
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"The girls' fashion section is adorable! My 5-year old is obsessed with her new sparkly shoes."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">L</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Lily W.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 10 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"I ordered a designer watch to Germany. The packaging was premium and authentic. 10/10 experience!"</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">C</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Charlotte D.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"I ordered a designer watch to New York. The packaging was premium and authentic. 10/10 experience!"</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">C</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Charlotte D.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 11 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★☆</div>
-        <div class="lumu-review-text">"The baby rompers are very breathable. Great for the changing UK weather! Delivery was faster than expected."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">E</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Emma P.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★☆</div>
+          <div class="lumu-review-text">"The baby rompers are very breathable. Great for the changing US weather! Delivery was faster than expected."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">E</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Emma P.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 12 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Fast customer service and beautiful modern outfits. Will surely shop again for the upcoming holidays."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">H</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Harper K.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Fast customer service and beautiful modern outfits. Will surely shop again for the upcoming holidays."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">H</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Harper K.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 13 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Love the trendy sunglasses collection! The quality literally rivals high-end designer brands in Europe."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">A</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Ava F.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Love the trendy sunglasses collection! The quality literally rivals high-end designer brands in the US."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">A</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Ava F.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 14 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"My newborn's nursery items came perfectly packaged. Safe materials and adorable designs. So glad I found Lumu."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">E</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Ella J.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"My newborn's nursery items came perfectly packaged. Safe materials and adorable designs. So glad I found Lumu."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">E</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Ella J.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 15 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Gorgeous block heels! I wore them all night at an event in Paris and they were surprisingly so comfortable."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">F</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Freya V.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Gorgeous block heels! I wore them all night at an event in Miami and they were surprisingly so comfortable."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">F</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Freya V.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Card 16 -->
-      <div class="lumu-review-card">
-        <div class="lumu-review-stars">★★★★★</div>
-        <div class="lumu-review-text">"Top-tier fashion finds for kids. Quality is amazing and vibrant colours don't fade after washing. Highly recommended."</div>
-        <div class="lumu-review-footer">
-          <div class="lumu-review-avatar">A</div>
-          <div class="lumu-review-author-info">
-            <span class="lumu-review-author">Alice N.</span>
-            <span class="lumu-review-buyer">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Verified Buyer
-            </span>
+        <div class="lumu-review-card">
+          <div class="lumu-review-stars">★★★★★</div>
+          <div class="lumu-review-text">"Top-tier fashion finds for kids. Quality is amazing and vibrant colours don't fade after washing. Highly recommended."</div>
+          <div class="lumu-review-footer">
+            <div class="lumu-review-avatar">A</div>
+            <div class="lumu-review-author-info">
+              <span class="lumu-review-author">Alice N.</span>
+              <span class="lumu-review-buyer">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                Verified Buyer
+              </span>
+            </div>
           </div>
         </div>
-      </div>
+      {%- endif -%}
     {%- endcapture -%}
 
     <div class="lumu-marquee-track reverse-track">
@@ -427,10 +463,214 @@
   "name": "Lumu Customer Reviews",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Loved by Thousands of Women"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Section Subtitle",
+      "default": "Discover why Lumu is the top choice for Premium Fashion & Kids Essentials in the US"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "marquee_review",
+      "name": "Marquee Review",
+      "settings": [
+        {
+          "type": "select",
+          "id": "row",
+          "label": "Marquee Row",
+          "options": [
+            { "value": "row_1", "label": "Row 1 (Left to Right)" },
+            { "value": "row_2", "label": "Row 2 (Right to Left)" }
+          ],
+          "default": "row_1"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "Review text goes here."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Jane D."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Buyer",
+          "default": true
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Customer Reviews"
+      "name": "Lumu Customer Reviews",
+      "blocks": [
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "The kids' collection is unbelievably soft! My daughter loves her new dresses. Seamless delivery across the US too.",
+            "author": "Emily S."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "Found the perfect handbag for my office wear. The quality is absolute premium and it arrived in Boston in just 2 days!",
+            "author": "Sophie C."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "I ordered matching outfits for my twins, and they are gorgeous. The fabric is amazing for their sensitive skin. Will definitely order from Lumu again.",
+            "author": "Chloe M."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "The jewelry pieces I bought are exactly as shown in the pictures. So elegant and perfect for everyday wear!",
+            "author": "Olivia H."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "Honestly, the best online shopping experience in the US. My son's toys and clothes are top notch and durable.",
+            "author": "Isabella T."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "Got a stunning evening dress for a wedding. The fit is perfect and material is truly luxurious. Thank you Lumu!",
+            "author": "Mia R."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "As a working mum, I need quick deliveries. Lumu brought my baby's essentials exactly on time. Highly recommend.",
+            "author": "Amelia B."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_1",
+            "rating": 5,
+            "text": "Amazing premium makeup organizers. Transformed my vanity completely! The acrylic is thick and beautiful.",
+            "author": "Grace L."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "The girls' fashion section is adorable! My 5-year old is obsessed with her new sparkly shoes.",
+            "author": "Lily W."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "I ordered a designer watch to New York. The packaging was premium and authentic. 10/10 experience!",
+            "author": "Charlotte D."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 4,
+            "text": "The baby rompers are very breathable. Great for the changing US weather! Delivery was faster than expected.",
+            "author": "Emma P."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "Fast customer service and beautiful modern outfits. Will surely shop again for the upcoming holidays.",
+            "author": "Harper K."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "Love the trendy sunglasses collection! The quality literally rivals high-end designer brands in the US.",
+            "author": "Ava F."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "My newborn's nursery items came perfectly packaged. Safe materials and adorable designs. So glad I found Lumu.",
+            "author": "Ella J."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "Gorgeous block heels! I wore them all night at an event in Miami and they were surprisingly so comfortable.",
+            "author": "Freya V."
+          }
+        },
+        {
+          "type": "marquee_review",
+          "settings": {
+            "row": "row_2",
+            "rating": 5,
+            "text": "Top-tier fashion finds for kids. Quality is amazing and vibrant colours don't fade after washing. Highly recommended.",
+            "author": "Alice N."
+          }
+        }
+      ]
     }
   ]
 }

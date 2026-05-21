@@ -6,10 +6,9 @@
   <div id="modal-about" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">About Lumu</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.about_title | default: "About Lumu" }}</h2>
       <div class="lumu-modal__body">
-        <p>Welcome to <strong>LUMU</strong> - a revolutionary, large-scale e-commerce marketplace tailored to the evolving needs of our consumers.</p>
-        <p>With an extensive range of over 30+ product categories, LUMU is designed to serve every segment of society. We believe in bridging the gap between affordability and quality through streamlined drop-shipping and sourcing across the GCC.</p>
+        {{ section.settings.about_body | default: "<p>Welcome to <strong>LUMU</strong> - a revolutionary, large-scale e-commerce marketplace tailored to the evolving needs of our consumers.</p><p>With an extensive range of over 30+ product categories, LUMU is designed to serve every segment of society. We believe in bridging the gap between affordability and quality through streamlined drop-shipping and sourcing across the United States.</p>" }}
       </div>
     </div>
   </div>
@@ -18,11 +17,11 @@
   <div id="modal-contact" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Contact Us</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.contact_title | default: "Contact Us" }}</h2>
       <div class="lumu-modal__body">
         <p>We are always here to help you with your inquiries.</p>
-        <p><strong>Email:</strong> support@lumu.pk</p>
-        <p><strong>Working Hours:</strong> Monday to Saturday, 9:00 AM - 6:00 PM</p>
+        <p><strong>Email:</strong> {{ section.settings.contact_email | default: "support@lumu.com" }}</p>
+        <p><strong>Working Hours:</strong> {{ section.settings.working_hours | default: "Monday to Saturday, 9:00 AM - 6:00 PM" }}</p>
       </div>
     </div>
   </div>
@@ -31,10 +30,10 @@
   <div id="modal-careers" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Careers at Lumu</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.careers_title | default: "Careers at Lumu" }}</h2>
       <div class="lumu-modal__body">
         <p>Join the e-commerce revolution! We are always on the lookout for bright, passionate talent to join our growing team.</p>
-        <p>Send your resume and portfolio to <strong>careers@lumu.pk</strong>.</p>
+        <p>Send your resume and portfolio to <strong>{{ section.settings.careers_email | default: "careers@lumu.com" }}</strong>.</p>
       </div>
     </div>
   </div>
@@ -43,10 +42,10 @@
   <div id="modal-press" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Press & Media</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.press_title | default: "Press & Media" }}</h2>
       <div class="lumu-modal__body">
         <p>For all press releases, media inquiries, and public relations, please reach out directly to our dedicated media team.</p>
-        <p><strong>Contact:</strong> media@lumu.pk</p>
+        <p><strong>Contact:</strong> {{ section.settings.press_email | default: "media@lumu.com" }}</p>
       </div>
     </div>
   </div>
@@ -55,9 +54,9 @@
   <div id="modal-ability" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Lumu's Ability Program</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.ability_title | default: "Lumu's Ability Program" }}</h2>
       <div class="lumu-modal__body">
-        <p>At Lumu, we believe commerce should be inclusive. The Ability Program is dedicated to empowering differently-abled individuals by providing them seamless opportunities to sell and work within our ecosystem.</p>
+        {{ section.settings.ability_body | default: "<p>At Lumu, we believe commerce should be inclusive. The Ability Program is dedicated to empowering differently-abled individuals by providing them seamless opportunities to sell and work within our ecosystem.</p>" }}
       </div>
     </div>
   </div>
@@ -66,10 +65,9 @@
   <div id="modal-faq" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Frequently Asked Questions</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.faq_title | default: "Frequently Asked Questions" }}</h2>
       <div class="lumu-modal__body">
-        <p><strong>Q: How long does shipping take?</strong><br>A: Standard air freight delivery takes 8-12 days across the GCC.</p>
-        <p><strong>Q: Are my payments safe?</strong><br>A: Yes! Our checkout utilizes industry-leading encryption and verified payment gateways.</p>
+        {{ section.settings.faq_body | default: "<p><strong>Q: How long does shipping take?</strong><br>A: Standard shipping takes 3-5 business days across the United States.</p><p><strong>Q: Are my payments safe?</strong><br>A: Yes! Our checkout utilizes industry-leading encryption and verified payment gateways.</p>" }}
       </div>
     </div>
   </div>
@@ -78,9 +76,9 @@
   <div id="modal-protection" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Purchase Protection</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.protection_title | default: "Purchase Protection" }}</h2>
       <div class="lumu-modal__body">
-        <p>Shop with 100% confidence. If your item does not arrive within the promised timeframe or differs from the description, our <strong>Purchase Protection</strong> guarantees a full review and return/refund.</p>
+        {{ section.settings.protection_body | default: "<p>Shop with 100% confidence. If your item does not arrive within the promised timeframe or differs from the description, our <strong>Purchase Protection</strong> guarantees a full review and return/refund.</p>" }}
       </div>
     </div>
   </div>
@@ -89,10 +87,10 @@
   <div id="modal-partner" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Partner With Lumu</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.partner_title | default: "Partner With Lumu" }}</h2>
       <div class="lumu-modal__body">
-        <p>Are you a manufacturer, distributor, or logistics provider? Partner with the fastest-growing GCC marketplace today.</p>
-        <p>Contact us at <strong>partners@lumu.pk</strong> to discuss integration.</p>
+        <p>Are you a manufacturer, distributor, or logistics provider? Partner with the fastest-growing US marketplace today.</p>
+        <p>Contact us at <strong>{{ section.settings.partner_email | default: "partners@lumu.com" }}</strong> to discuss integration.</p>
       </div>
     </div>
   </div>
@@ -101,9 +99,9 @@
   <div id="modal-seller-faq" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Seller FAQ</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.seller_faq_title | default: "Seller FAQ" }}</h2>
       <div class="lumu-modal__body">
-        <p><strong>Q: What do I need to start selling?</strong><br>A: Valid business registration and a commitment to quality. Join our seller portal to register your inventory.</p>
+        {{ section.settings.seller_faq_body | default: "<p><strong>Q: What do I need to start selling?</strong><br>A: Valid business registration and a commitment to quality. Join our seller portal to register your inventory.</p>" }}
       </div>
     </div>
   </div>
@@ -112,9 +110,9 @@
   <div id="modal-seller-terms" class="lumu-modal">
     <div class="lumu-modal__content">
       <button class="lumu-modal__close" aria-label="Close">&times;</button>
-      <h2 class="lumu-modal__title">Seller Terms & Conditions</h2>
+      <h2 class="lumu-modal__title">{{ section.settings.seller_terms_title | default: "Seller Terms & Conditions" }}</h2>
       <div class="lumu-modal__body">
-        <p>By registering as a merchant on Lumu, you agree to adhere strictly to our quality control guidelines, timely dispatch policies, and customer dispute resolution frameworks. Ensuring end-buyer satisfaction is our top mutual priority.</p>
+        {{ section.settings.seller_terms_body | default: "<p>By registering as a merchant on Lumu, you agree to adhere strictly to our quality control guidelines, timely dispatch policies, and customer dispute resolution frameworks. Ensuring end-buyer satisfaction is our top mutual priority.</p>" }}
       </div>
     </div>
   </div>
@@ -162,6 +160,173 @@
 {% schema %}
 {
   "name": "Lumu Custom Modals",
-  "settings": []
+  "settings": [
+    {
+      "type": "header",
+      "content": "About Modal"
+    },
+    {
+      "type": "text",
+      "id": "about_title",
+      "label": "About Title",
+      "default": "About Lumu"
+    },
+    {
+      "type": "richtext",
+      "id": "about_body",
+      "label": "About Body",
+      "default": "<p>Welcome to <strong>LUMU</strong> - a revolutionary, large-scale e-commerce marketplace tailored to the evolving needs of our consumers.</p><p>With an extensive range of over 30+ product categories, LUMU is designed to serve every segment of society. We believe in bridging the gap between affordability and quality through streamlined drop-shipping and sourcing across the United States.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Contact Modal"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact Email",
+      "default": "support@lumu.com"
+    },
+    {
+      "type": "text",
+      "id": "working_hours",
+      "label": "Working Hours",
+      "default": "Monday to Saturday, 9:00 AM - 6:00 PM"
+    },
+    {
+      "type": "header",
+      "content": "Careers Modal"
+    },
+    {
+      "type": "text",
+      "id": "careers_title",
+      "label": "Careers Title",
+      "default": "Careers at Lumu"
+    },
+    {
+      "type": "text",
+      "id": "careers_email",
+      "label": "Careers Email",
+      "default": "careers@lumu.com"
+    },
+    {
+      "type": "header",
+      "content": "Press Modal"
+    },
+    {
+      "type": "text",
+      "id": "press_title",
+      "label": "Press Title",
+      "default": "Press & Media"
+    },
+    {
+      "type": "text",
+      "id": "press_email",
+      "label": "Press Email",
+      "default": "media@lumu.com"
+    },
+    {
+      "type": "header",
+      "content": "Ability Program Modal"
+    },
+    {
+      "type": "text",
+      "id": "ability_title",
+      "label": "Ability Title",
+      "default": "Lumu's Ability Program"
+    },
+    {
+      "type": "richtext",
+      "id": "ability_body",
+      "label": "Ability Body",
+      "default": "<p>At Lumu, we believe commerce should be inclusive. The Ability Program is dedicated to empowering differently-abled individuals by providing them seamless opportunities to sell and work within our ecosystem.</p>"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Modal"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQ Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "richtext",
+      "id": "faq_body",
+      "label": "FAQ Body",
+      "default": "<p><strong>Q: How long does shipping take?</strong><br>A: Standard shipping takes 3-5 business days across the United States.</p><p><strong>Q: Are my payments safe?</strong><br>A: Yes! Our checkout utilizes industry-leading encryption and verified payment gateways.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Purchase Protection Modal"
+    },
+    {
+      "type": "text",
+      "id": "protection_title",
+      "label": "Protection Title",
+      "default": "Purchase Protection"
+    },
+    {
+      "type": "richtext",
+      "id": "protection_body",
+      "label": "Protection Body",
+      "default": "<p>Shop with 100% confidence. If your item does not arrive within the promised timeframe or differs from the description, our <strong>Purchase Protection</strong> guarantees a full review and return/refund.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Partner Modal"
+    },
+    {
+      "type": "text",
+      "id": "partner_title",
+      "label": "Partner Title",
+      "default": "Partner With Lumu"
+    },
+    {
+      "type": "text",
+      "id": "partner_email",
+      "label": "Partner Email",
+      "default": "partners@lumu.com"
+    },
+    {
+      "type": "header",
+      "content": "Seller FAQ Modal"
+    },
+    {
+      "type": "text",
+      "id": "seller_faq_title",
+      "label": "Seller FAQ Title",
+      "default": "Seller FAQ"
+    },
+    {
+      "type": "richtext",
+      "id": "seller_faq_body",
+      "label": "Seller FAQ Body",
+      "default": "<p><strong>Q: What do I need to start selling?</strong><br>A: Valid business registration and a commitment to quality. Join our seller portal to register your inventory.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Seller Terms Modal"
+    },
+    {
+      "type": "text",
+      "id": "seller_terms_title",
+      "label": "Seller Terms Title",
+      "default": "Seller Terms & Conditions"
+    },
+    {
+      "type": "richtext",
+      "id": "seller_terms_body",
+      "label": "Seller Terms Body",
+      "default": "<p>By registering as a merchant on Lumu, you agree to adhere strictly to our quality control guidelines, timely dispatch policies, and customer dispute resolution frameworks. Ensuring end-buyer satisfaction is our top mutual priority.</p>"
+    }
+  ]
 }
 {% endschema %}

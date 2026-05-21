@@ -80,8 +80,12 @@
 <div class="lumu-brand-story">
   <div class="lumu-bs__inner">
     <div class="lumu-bs__img-wrapper">
-      <!-- Using a highly premium portrait lifestyle image specifically generated for Lumu's Curated Excellence -->
-      <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Lumu Curated Excellence" class="lumu-bs__img" loading="lazy">
+      {%- if section.settings.image != blank -%}
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | default: section.settings.title | escape }}" class="lumu-bs__img" loading="lazy">
+      {%- else -%}
+        <!-- Using a highly premium portrait lifestyle image specifically generated for Lumu's Curated Excellence -->
+        <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Lumu Curated Excellence" class="lumu-bs__img" loading="lazy">
+      {%- endif -%}
     </div>
     
     <div class="lumu-bs__content">
@@ -92,18 +96,27 @@
       </div>
       
       <div class="lumu-bs__features">
-        <div class="lumu-bs__feature">
-          <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
-          Handpicked Premium Quality Products
-        </div>
-        <div class="lumu-bs__feature">
-          <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
-          Premium Tracked Shipping Across UAE, KSA & GCC
-        </div>
-        <div class="lumu-bs__feature">
-          <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
-          100% Secure Checkout & Dedicated Support
-        </div>
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            <div class="lumu-bs__feature" {{ block.shopify_attributes }}>
+              <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
+              {{ block.settings.text }}
+            </div>
+          {%- endfor -%}
+        {%- else -%}
+          <div class="lumu-bs__feature">
+            <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
+            Handpicked Premium Quality Products
+          </div>
+          <div class="lumu-bs__feature">
+            <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
+            Premium Tracked Shipping Across the USA
+          </div>
+          <div class="lumu-bs__feature">
+            <span style="color: #10b981; font-weight: bold; margin-right: 8px;">✅</span>
+            100% Secure Checkout & Dedicated Support
+          </div>
+        {%- endif -%}
       </div>
       
       {%- if section.settings.button_label != blank -%}
@@ -136,13 +149,13 @@
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Curated Excellence, Delivered Across the GCC"
+      "default": "Curated Excellence, Delivered Across the USA"
     },
     {
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>At Lumu, we believe your shopping experience should be absolutely effortless. We globally source the finest fashion, high-tech gadgets, and home essentials to bring you unparalleled value. Sit back and relax while we handle everything from secure checkout to reliable tracked delivery across the GCC region.</p>"
+      "default": "<p>At Lumu, we believe your shopping experience should be absolutely effortless. We globally source the finest fashion, high-tech gadgets, and home essentials to bring you unparalleled value. Sit back and relax while we handle everything from secure checkout to reliable tracked delivery across the United States.</p>"
     },
     {
       "type": "text",
@@ -156,9 +169,43 @@
       "label": "Button link"
     }
   ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "Premium Quality Handpicked Products"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Brand Story"
+      "name": "Lumu Brand Story",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Handpicked Premium Quality Products"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "Premium Tracked Shipping Across the USA"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "text": "100% Secure Checkout & Dedicated Support"
+          }
+        }
+      ]
     }
   ]
 }

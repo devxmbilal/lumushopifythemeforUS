@@ -2,16 +2,27 @@
 <div class="lumu-pre-footer-products">
   <div class="lumu-pfp__inner">
     <div class="lumu-pfp__header">
-      <h2 class="lumu-pfp__title">Trending Now</h2>
-      <a href="/collections/all" class="lumu-pfp__shop-btn">
-        Shop All Products
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-      </a>
+      <h2 class="lumu-pfp__title">{{ section.settings.title | default: "Trending Now" }}</h2>
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="lumu-pfp__shop-btn">
+          {{ section.settings.button_label }}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+        </a>
+      {%- endif -%}
     </div>
     <div class="lumu-pfp__grid">
-      {%- assign products_list = collections.all.products -%}
-      {%- if products_list.size > 0 -%}
-        {%- for product in products_list limit: 4 offset: 8 -%}
+      {%- assign selected_collection = section.settings.collection -%}
+      {%- if selected_collection != blank -%}
+        {%- assign products_list = collections[selected_collection].products -%}
+      {%- else -%}
+        {%- assign products_list = collections.all.products -%}
+      {%- endif -%}
+
+      {%- assign limit_count = section.settings.products_to_show | default: 4 -%}
+      {%- assign offset_count = section.settings.products_offset | default: 0 -%}
+
+      {%- if products_list.size > offset_count -%}
+        {%- for product in products_list limit: limit_count offset: offset_count -%}
           <div class="lumu-pfp__card-wrapper" style="height: 100%;">
             <a href="{{ product.url }}" class="lumu-pfp__card">
               <div class="lumu-pfp__card-img-wrap">
@@ -47,7 +58,7 @@
           </div>
         {%- endfor -%}
       {%- else -%}
-        {%- for i in (1..4) -%}
+        {%- for i in (1..limit_count) -%}
           <div class="lumu-pfp__card-wrapper" style="height: 100%;">
             <div class="lumu-pfp__card">
               <div class="lumu-pfp__card-img-wrap">
@@ -63,7 +74,7 @@
                   <span>(5.0)</span>
                 </div>
                 <div class="lumu-pfp__card-name">Lumu Premium Product {{ i }}</div>
-                <div class="lumu-pfp__card-price">Rs 1,999</div>
+                <div class="lumu-pfp__card-price">$49.99</div>
                 <div class="lumu-pfp__atc-btn">Add to Cart</div>
               </div>
             </div>
@@ -79,7 +90,49 @@
   "name": "Lumu Footer Products",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Trending Now"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "products_offset",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "label": "Products offset",
+      "default": 0
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Shop All Products"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    }
+  ],
   "presets": [
     {
       "name": "Lumu Footer Products"

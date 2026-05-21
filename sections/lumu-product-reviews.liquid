@@ -9,7 +9,7 @@
     <!-- Reviews Header -->
     <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; margin-bottom: 40px;">
       <div>
-        <h2 style="color: white; font-size: 3.2rem; margin: 0 0 10px 0; font-weight: 700;">Customer Reviews</h2>
+        <h2 style="color: white; font-size: 3.2rem; margin: 0 0 10px 0; font-weight: 700;">{{ section.settings.title | default: "Customer Reviews" }}</h2>
         <div style="display: flex; align-items: center; gap: 10px;">
           <div style="display: flex; color: #FFD700; gap: 4px;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -18,74 +18,92 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
           </div>
-          <span style="font-size: 1.6rem; opacity: 0.8;">Based on 128 Reviews</span>
+          <span style="font-size: 1.6rem; opacity: 0.8;">{{ section.settings.based_on | default: "Based on 128 Reviews" }}</span>
         </div>
       </div>
-      <button style="margin-top: 20px; background: var(--lumu-purple, #8577C7); color: white; border: none; padding: 12px 30px; font-size: 1.6rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s ease;">
-        Write a Review
-      </button>
+      {%- if section.settings.button_label != blank -%}
+        <button style="margin-top: 20px; background: var(--lumu-purple, #8577C7); color: white; border: none; padding: 12px 30px; font-size: 1.6rem; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s ease;">
+          {{ section.settings.button_label }}
+        </button>
+      {%- endif -%}
     </div>
 
     <!-- Review Cards Grid -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
-      
-      <!-- Review 1 -->
-      <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-          <div>
-            <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">Amazing Quality!</h3>
-            <div style="display: flex; color: #FFD700; gap: 2px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);" {{ block.shopify_attributes }}>
+            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+              <div>
+                <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">{{ block.settings.title }}</h3>
+                <div style="display: flex; color: #FFD700; gap: 2px;">
+                  {%- for i in (1..block.settings.rating) -%}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                  {%- endfor -%}
+                </div>
+              </div>
+              {%- if block.settings.verified -%}
+                <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
+              {%- endif -%}
             </div>
+            <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">{{ block.settings.text }}</p>
+            <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">{{ block.settings.author }}</span>
           </div>
-          <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
-        </div>
-        <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">The product exceeded my expectations. Delivery was fast, and the packaging was fully secure. Highly recommended.</p>
-        <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Sarah Khan</span>
-      </div>
-
-      <!-- Review 2 -->
-      <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-          <div>
-            <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">10/10 Experience</h3>
-            <div style="display: flex; color: #FFD700; gap: 2px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        {%- endfor -%}
+      {%- else -%}
+        <!-- Fallback cards -->
+        <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">Amazing Quality!</h3>
+              <div style="display: flex; color: #FFD700; gap: 2px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
             </div>
+            <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
           </div>
-          <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
+          <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">The product exceeded my expectations. Delivery was fast, and the packaging was fully secure. Highly recommended.</p>
+          <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Sarah K.</span>
         </div>
-        <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">Exactly what I was looking for. Premium feel and perfect fit. I'll definitely be shopping more from Lumu.</p>
-        <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Ahmed Raza</span>
-      </div>
-
-      <!-- Review 3 -->
-      <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
-        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-          <div>
-            <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">Customer for life!</h3>
-            <div style="display: flex; color: #FFD700; gap: 2px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">10/10 Experience</h3>
+              <div style="display: flex; color: #FFD700; gap: 2px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
             </div>
+            <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
           </div>
-          <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
+          <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">Exactly what I was looking for. Premium feel and perfect fit. I'll definitely be shopping more from Lumu.</p>
+          <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Alexander R.</span>
         </div>
-        <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">The 24/7 support answered all my questions instantly. When the product arrived, I was blown away by the quality.</p>
-        <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Fatima M.</span>
-      </div>
-
+        <div style="background: white; border-radius: 12px; padding: 24px; color: var(--lumu-dark, #0f172a);">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+            <div>
+              <h3 style="margin: 0 0 4px 0; font-size: 1.8rem; font-weight: 700;">Customer for life!</h3>
+              <div style="display: flex; color: #FFD700; gap: 2px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </div>
+            </div>
+            <span style="font-size: 1.2rem; background: #e8f5e9; color: #2e7d32; padding: 4px 8px; border-radius: 4px; font-weight: 600;">Verified Buyer ✔</span>
+          </div>
+          <p style="font-size: 1.5rem; line-height: 1.6; margin: 0 0 16px 0; opacity: 0.8;">The 24/7 support answered all my questions instantly. When the product arrived, I was blown away by the quality.</p>
+          <span style="font-size: 1.3rem; font-weight: 600; opacity: 0.6;">Olivia M.</span>
+        </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
@@ -94,10 +112,99 @@
 {
   "name": "Product Reviews",
   "tag": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "text",
+      "id": "based_on",
+      "label": "Based On Text",
+      "default": "Based on 128 Reviews"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Write a Review"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review_card",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Amazing Quality!"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "The product exceeded my expectations. Delivery was fast, and the packaging was fully secure. Highly recommended."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Sarah K."
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Buyer",
+          "default": true
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Product Reviews"
+      "name": "Lumu Product Reviews",
+      "blocks": [
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Amazing Quality!",
+            "rating": 5,
+            "text": "The product exceeded my expectations. Delivery was fast, and the packaging was fully secure. Highly recommended.",
+            "author": "Sarah K."
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "10/10 Experience",
+            "rating": 5,
+            "text": "Exactly what I was looking for. Premium feel and perfect fit. I'll definitely be shopping more from Lumu.",
+            "author": "Alexander R."
+          }
+        },
+        {
+          "type": "review_card",
+          "settings": {
+            "title": "Customer for life!",
+            "rating": 5,
+            "text": "The 24/7 support answered all my questions instantly. When the product arrived, I was blown away by the quality.",
+            "author": "Olivia M."
+          }
+        }
+      ]
     }
   ]
 }

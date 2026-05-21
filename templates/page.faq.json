@@ -35,7 +35,7 @@
           "settings": {
             "heading": "How long does delivery take?",
             "icon": "truck",
-            "row_content": "<p>Standard delivery takes 3-5 business days across Pakistan. Major cities like Karachi, Lahore, and Islamabad typically receive orders within 2-3 business days.</p>"
+            "row_content": "<p>Standard delivery takes 3-5 business days across the United States. Major metropolitan areas typically receive orders within 2-3 business days.</p>"
           }
         },
         "q_2": {
@@ -43,7 +43,7 @@
           "settings": {
             "heading": "Is shipping really free?",
             "icon": "truck",
-            "row_content": "<p>Yes! We offer free standard shipping on all orders over Rs 2,000. Orders below Rs 2,000 have a flat shipping fee of Rs 150.</p>"
+            "row_content": "<p>Yes! We offer free standard shipping on all orders over $50. Orders below $50 have a flat shipping fee of $4.99.</p>"
           }
         },
         "q_3": {
@@ -51,15 +51,15 @@
           "settings": {
             "heading": "How can I track my order?",
             "icon": "truck",
-            "row_content": "<p>Once your order ships, you'll receive a tracking number via SMS and email. You can also track your order from your account page on our website.</p>"
+            "row_content": "<p>Once your order ships, you'll receive a tracking number via email. You can also track your order from your account page on our website.</p>"
           }
         },
         "q_4": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Do you deliver to all cities in Pakistan?",
+            "heading": "Do you deliver to all states in the US?",
             "icon": "truck",
-            "row_content": "<p>Yes! We deliver nationwide across Pakistan through our trusted courier partners. Whether you're in a major city or a smaller town, we've got you covered.</p>"
+            "row_content": "<p>Yes! We deliver nationwide across all 50 states in the United States, including Alaska and Hawaii, through our trusted partners like UPS, FedEx, and USPS.</p>"
           }
         }
       },
@@ -85,7 +85,7 @@
           "settings": {
             "heading": "What is your return policy?",
             "icon": "return",
-            "row_content": "<p>We offer a 7-day hassle-free return policy. If you're not satisfied with your purchase, simply initiate a return within 7 days of delivery and we'll process your refund.</p>"
+            "row_content": "<p>We offer a 30-day hassle-free return policy. If you're not satisfied with your purchase, simply initiate a return within 30 days of delivery and we'll process your refund.</p>"
           }
         },
         "r_2": {
@@ -93,7 +93,7 @@
           "settings": {
             "heading": "How do I return an item?",
             "icon": "return",
-            "row_content": "<p>Contact our support team via WhatsApp or email with your order number. We'll arrange a pickup from your address at no extra cost.</p>"
+            "row_content": "<p>Contact our support team via email or our contact page with your order number. We'll provide a pre-paid shipping label for you to easily send your items back.</p>"
           }
         },
         "r_3": {
@@ -101,7 +101,7 @@
           "settings": {
             "heading": "When will I receive my refund?",
             "icon": "return",
-            "row_content": "<p>Refunds are processed within 5-7 business days after we receive and inspect the returned item. The amount will be credited to your original payment method.</p>"
+            "row_content": "<p>Refunds are processed within 5-7 business days after we receive and inspect the returned item. The amount will be credited back to your original payment method.</p>"
           }
         }
       },
@@ -127,15 +127,15 @@
           "settings": {
             "heading": "What payment methods do you accept?",
             "icon": "lock",
-            "row_content": "<p>We accept Cash on Delivery (COD), credit/debit cards (Visa, Mastercard), bank transfers, JazzCash, and EasyPaisa. All online payments are secured with SSL encryption.</p>"
+            "row_content": "<p>We accept all major credit/debit cards (Visa, Mastercard, AMEX, Discover), Apple Pay, Google Pay, and PayPal. All online payments are fully secured with SSL encryption.</p>"
           }
         },
         "p_2": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Is Cash on Delivery available?",
+            "heading": "Are payment plans available?",
             "icon": "lock",
-            "row_content": "<p>Yes, Cash on Delivery (COD) is available nationwide across Pakistan. Simply select COD at checkout and pay when your order arrives.</p>"
+            "row_content": "<p>Yes! We offer flexible buy now, pay later options through Shop Pay Installments and PayPal Pay in 4 at checkout, allowing you to split your purchase into interest-free payments.</p>"
           }
         },
         "p_3": {
@@ -174,7 +174,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Our support team is available 24/7 to help. Reach out to us anytime via our contact page or WhatsApp.</p>"
+            "text": "<p>Our support team is available to help. Reach out to us anytime via our contact page or email support@lumu.com.</p>"
           }
         },
         "button": {

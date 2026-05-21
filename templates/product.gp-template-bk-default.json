@@ -44,7 +44,7 @@
         },
         "collapsible-row-0": {
           "settings": {
-            "content": "<p>We offer free shipping on orders above Rs 2,000 across Pakistan. Standard delivery takes 3-5 business days. Major cities receive orders within 2-3 days.</p>",
+            "content": "<p>We offer free shipping on orders above $50 across the United States. Standard delivery takes 3-5 business days. Major cities receive orders within 2-3 days.</p>",
             "heading": "Shipping & Delivery",
             "icon": "truck",
             "page": ""
@@ -53,7 +53,7 @@
         },
         "collapsible-row-1": {
           "settings": {
-            "content": "<p>Changed your mind? No worries! We accept returns within 7 days of delivery. Items must be unused and in original packaging. Contact us via WhatsApp for instant support.</p>",
+            "content": "<p>Changed your mind? No worries! We accept returns within 30 days of delivery. Items must be unused and in original packaging. Contact our support team for instant assistance.</p>",
             "heading": "Returns & Exchange",
             "icon": "return",
             "page": ""

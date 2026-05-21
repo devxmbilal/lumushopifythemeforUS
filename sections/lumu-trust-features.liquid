@@ -64,51 +64,75 @@
 
 <div class="lumu-trust">
   <div class="lumu-trust__title">
-    <h2>Why Shop With Lumu?</h2>
+    <h2>{{ section.settings.title }}</h2>
   </div>
   <div class="lumu-trust__grid">
-    <!-- Premium Shipping -->
-    <div class="lumu-trust__card">
-      <div class="lumu-trust__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-        </svg>
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div class="lumu-trust__card" {{ block.shopify_attributes }}>
+          <div class="lumu-trust__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'shipping' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              {%- when 'quality' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+                </svg>
+              {%- when 'checkout' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+                </svg>
+              {%- when 'support' -%}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <div class="lumu-trust__card-title">{{ block.settings.title }}</div>
+          <div class="lumu-trust__card-text">{{ block.settings.text }}</div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <!-- Fallback static localized cards -->
+      <div class="lumu-trust__card">
+        <div class="lumu-trust__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div class="lumu-trust__card-title">Premium Shipping</div>
+        <div class="lumu-trust__card-text">Tracked and secure delivery across the United States straight to your doorstep. Free shipping on orders over $50.</div>
       </div>
-      <div class="lumu-trust__card-title">Premium Shipping</div>
-      <div class="lumu-trust__card-text">Tracked and secure delivery across the UAE & GCC straight to your doorstep. Free shipping on orders over 200 AED across the UAE.</div>
-    </div>
-    <!-- Quality Promise -->
-    <div class="lumu-trust__card">
-      <div class="lumu-trust__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
-        </svg>
+      <div class="lumu-trust__card">
+        <div class="lumu-trust__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+        </div>
+        <div class="lumu-trust__card-title">Quality Promise</div>
+        <div class="lumu-trust__card-text">We stand by our products. If something isn't right, our team is here to help with a straightforward 30-day return process.</div>
       </div>
-      <div class="lumu-trust__card-title">Quality Promise</div>
-      <div class="lumu-trust__card-text">We stand by our products. If something isn't right, our team is here to help with a straightforward return process.</div>
-    </div>
-    <!-- Safe & Flexible Checkout -->
-    <div class="lumu-trust__card">
-      <div class="lumu-trust__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-          <polyline points="9 12 11 14 15 10"/>
-        </svg>
+      <div class="lumu-trust__card">
+        <div class="lumu-trust__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="lumu-trust__card-title">Safe & Flexible Checkout</div>
+        <div class="lumu-trust__card-text">Shop with confidence. We offer 100% secure card payments using Visa, Mastercard, AMEX, and PayPal.</div>
       </div>
-      <div class="lumu-trust__card-title">Safe & Flexible Checkout</div>
-      <div class="lumu-trust__card-text">Shop with confidence. We offer 100% secure card payments and convenient Cash on Delivery (COD) options.</div>
-    </div>
-    <!-- We're Here For You -->
-    <div class="lumu-trust__card">
-      <div class="lumu-trust__icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          <line x1="9" y1="10" x2="15" y2="10"/>
-        </svg>
+      <div class="lumu-trust__card">
+        <div class="lumu-trust__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/>
+          </svg>
+        </div>
+        <div class="lumu-trust__card-title">We're Here For You</div>
+        <div class="lumu-trust__card-text">Got a question? Our dedicated US-based support team is just an email or message away to ensure a smooth shopping experience.</div>
       </div>
-      <div class="lumu-trust__card-title">We're Here For You</div>
-      <div class="lumu-trust__card-text">Got a question? Our dedicated support team is just an email or message away to ensure a smooth shopping experience.</div>
-    </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -117,10 +141,83 @@
   "name": "Lumu Trust Features",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Why Shop With Lumu?"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Feature Icon",
+          "options": [
+            { "value": "shipping", "label": "Shipping Truck" },
+            { "value": "quality", "label": "Return/Quality Loop" },
+            { "value": "checkout", "label": "Secure Checkout Shield" },
+            { "value": "support", "label": "Customer Support Bubble" }
+          ],
+          "default": "shipping"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Feature Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Feature Text",
+          "default": "Feature description text goes here."
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Trust Features"
+      "name": "Lumu Trust Features",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "shipping",
+            "title": "Premium Shipping",
+            "text": "Tracked and secure delivery across the United States straight to your doorstep. Free shipping on orders over $50."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "quality",
+            "title": "Quality Promise",
+            "text": "We stand by our products. If something isn't right, our team is here to help with a straightforward 30-day return process."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "checkout",
+            "title": "Safe & Flexible Checkout",
+            "text": "Shop with confidence. We offer 100% secure card payments using Visa, Mastercard, AMEX, and PayPal."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "support",
+            "title": "We're Here For You",
+            "text": "Got a question? Our dedicated US-based support team is just an email or message away to ensure a smooth shopping experience."
+          }
+        }
+      ]
     }
   ]
 }
