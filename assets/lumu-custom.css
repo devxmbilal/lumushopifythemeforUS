@@ -4061,13 +4061,16 @@ quantity-input.quantity .quantity__input {
     width: 36px !important;
     height: 36px !important;
     display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
     align-items: center !important;
     justify-content: center !important;
     color: #475569 !important;
     transition: all 0.2s ease !important;
     border: none !important;
     box-shadow: none !important;
-    z-index: 15 !important;
+    z-index: 99999999 !important; /* Stack at the absolute top layer to ensure clickability */
+    cursor: pointer !important;
   }
 
   .search-modal__close-button:hover,
@@ -4079,6 +4082,9 @@ quantity-input.quantity .quantity__input {
   .search-modal__close-button svg {
     width: 14px !important;
     height: 14px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 
   /* Form Container */
