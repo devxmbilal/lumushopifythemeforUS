@@ -3881,3 +3881,61 @@ quantity-input.quantity .quantity__input {
   font-weight: 600 !important;
   color: #111827 !important;
 }
+
+/* Description Truncation & Show More Button Modernization */
+.lumu-description-wrapper {
+  position: relative !important;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  width: 100% !important;
+}
+
+.lumu-description-wrapper.truncated {
+  max-height: 220px !important;
+  overflow: hidden !important;
+}
+
+.lumu-description-wrapper.truncated .lumu-description-fade {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 70px !important;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1)) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+.lumu-description-wrapper.expanded .lumu-description-fade {
+  display: none !important;
+}
+
+.lumu-show-more-btn {
+  background: none !important;
+  border: 1.5px solid #e5e7eb !important;
+  padding: 8px 22px !important;
+  border-radius: 30px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #00966c !important;
+  cursor: pointer !important;
+  margin-top: 15px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.25s ease !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.lumu-show-more-btn:hover {
+  background-color: #f9fafb !important;
+  border-color: #00966c !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 150, 108, 0.1) !important;
+}
+
+.lumu-show-more-btn svg {
+  color: #00966c !important;
+  display: block;
+}
+

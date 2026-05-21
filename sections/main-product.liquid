@@ -115,42 +115,68 @@
                   -%}
                 </div>
                 
-                <!-- Premium E-commerce Indicators -->
-                <div class="lumu-product-indicators">
-                  <div class="lumu-indicator-pill processing-time">
-                    <span class="lumu-indicator-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </span>
-                    <span class="lumu-indicator-text"><strong>Estimated Processing Time:</strong> 1-2 days for 90% orders</span>
-                  </div>
-                  <div class="lumu-indicator-pill shipping-fee">
-                    <span class="lumu-indicator-icon">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                      </svg>
-                    </span>
-                    <span class="lumu-indicator-text"><strong>Shipping Fee:</strong> $3.00 (Free above $50)</span>
-                  </div>
-                  <div class="lumu-indicator-pill stock-status" id="stock-status-{{ section.id }}">
-                    {%- if product.selected_or_first_available_variant.available -%}
-                      <span class="lumu-indicator-icon checkmark">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="3" style="width: 14px; height: 14px;">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                      <span class="lumu-indicator-text" style="color: #10b981; font-weight: 700;">In Stock</span>
-                    {%- else -%}
-                      <span class="lumu-indicator-icon xmark">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="3" style="width: 14px; height: 14px;">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </span>
-                      <span class="lumu-indicator-text" style="color: #ef4444; font-weight: 700;">Out of Stock</span>
-                    {%- endif -%}
-                  </div>
-                </div>
+                    {%- liquid
+                      assign processing_time = product.metafields.custom.processing_time.value | default: product.metafields.custom.processing_time
+                      if processing_time == blank
+                        for tag in product.tags
+                          if tag contains 'processing:'
+                            assign processing_time = tag | split: 'processing:' | last | strip
+                          endif
+                        endfor
+                      endif
+
+                      assign shipping_fee = product.metafields.custom.shipping_fee.value | default: product.metafields.custom.shipping_fee
+                      if shipping_fee == blank
+                        for tag in product.tags
+                          if tag contains 'shipping:'
+                            assign shipping_fee = tag | split: 'shipping:' | last | strip
+                          endif
+                        endfor
+                      endif
+                    -%}
+
+                    <!-- Premium E-commerce Indicators -->
+                    <div class="lumu-product-indicators">
+                      {%- if processing_time != blank -%}
+                        <div class="lumu-indicator-pill processing-time">
+                          <span class="lumu-indicator-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </span>
+                          <span class="lumu-indicator-text"><strong>Estimated Processing Time:</strong> {{ processing_time }}</span>
+                        </div>
+                      {%- endif -%}
+                      
+                      {%- if shipping_fee != blank -%}
+                        <div class="lumu-indicator-pill shipping-fee">
+                          <span class="lumu-indicator-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                          </span>
+                          <span class="lumu-indicator-text"><strong>Shipping Fee:</strong> {{ shipping_fee }}</span>
+                        </div>
+                      {%- endif -%}
+
+                      <div class="lumu-indicator-pill stock-status" id="stock-status-{{ section.id }}">
+                        {%- if product.selected_or_first_available_variant.available -%}
+                          <span class="lumu-indicator-icon checkmark">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="3" style="width: 14px; height: 14px;">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                            </svg>
+                          </span>
+                          <span class="lumu-indicator-text" style="color: #10b981; font-weight: 700;">In Stock</span>
+                        {%- else -%}
+                          <span class="lumu-indicator-icon xmark">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="3" style="width: 14px; height: 14px;">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </span>
+                          <span class="lumu-indicator-text" style="color: #ef4444; font-weight: 700;">Out of Stock</span>
+                        {%- endif -%}
+                      </div>
+                    </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                     <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -229,57 +255,7 @@
                   {%- endif -%}
                 </p>
               {%- when 'description' -%}
-                <!-- Premium Modern E-commerce Tabs -->
-                <div class="lumu-product-tabs" {{ block.shopify_attributes }}>
-                  <div class="lumu-tab-header">
-                    <button class="lumu-tab-trigger active" onclick="lumuOpenTab(event, 'lumu-tab-desc')">Description</button>
-                    <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-specs')">Specifications</button>
-                    <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-shipping')">Shipping & Returns</button>
-                  </div>
-                  
-                  <div class="lumu-tab-content active" id="lumu-tab-desc">
-                    <div class="rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
-                      {%- if product.description != blank -%}
-                        {{ product.description }}
-                      {%- else -%}
-                        <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
-                      {%- endif -%}
-                    </div>
-                  </div>
-                  
-                  <div class="lumu-tab-content" id="lumu-tab-specs">
-                    <div class="lumu-specs-table">
-                      <div class="lumu-spec-row"><span class="spec-label">Brand</span><span class="spec-value">{{ product.vendor | default: 'Lumu Premium' }}</span></div>
-                      <div class="lumu-spec-row"><span class="spec-label">SKU</span><span class="spec-value">{{ product.selected_or_first_available_variant.sku | default: 'LUMU-PROD-NEW' }}</span></div>
-                      <div class="lumu-spec-row"><span class="spec-label">Availability</span><span class="spec-value">{% if product.selected_or_first_available_variant.available %}In Stock{% else %}Out of Stock{% endif %}</span></div>
-                      <div class="lumu-spec-row"><span class="spec-label">Shipping</span><span class="spec-value">Ships across the USA in 3-5 business days</span></div>
-                      <div class="lumu-spec-row"><span class="spec-label">Returns</span><span class="spec-value">30-day domestic return policy</span></div>
-                    </div>
-                  </div>
-                  
-                  <div class="lumu-tab-content" id="lumu-tab-shipping">
-                    <div class="rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
-                      <p><strong>🇺🇸 Domestic US Shipping:</strong> We offer tracked shipping across the United States. Standard delivery takes 3-5 business days.</p>
-                      <p><strong>🔄 30-Day Returns:</strong> If you are not entirely satisfied with your purchase, you can return it within 30 days of delivery. No questions asked!</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <script>
-                  function lumuOpenTab(evt, tabId) {
-                    var i, tabcontent, tablinks;
-                    tabcontent = document.getElementsByClassName("lumu-tab-content");
-                    for (i = 0; i < tabcontent.length; i++) {
-                      tabcontent[i].classList.remove("active");
-                    }
-                    tablinks = document.getElementsByClassName("lumu-tab-trigger");
-                    for (i = 0; i < tablinks.length; i++) {
-                      tablinks[i].classList.remove("active");
-                    }
-                    document.getElementById(tabId).classList.add("active");
-                    evt.currentTarget.classList.add("active");
-                  }
-                </script>
+                <!-- Description tab panel is rendered as full-width below details columns -->
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -818,9 +794,101 @@
             {{ 'products.product.view_full_details' | t }}
             {{- 'icon-arrow.svg' | inline_asset_content -}}
           </a>
-        </section>
+          </section>
+        </div>
+
+        <!-- Full-Width Modern Description & Specifications Tabs below both columns -->
+        {%- assign description_block = section.blocks | where: 'type', 'description' | first -%}
+        {%- if description_block -%}
+          <div class="lumu-product-tabs-wrapper grid__item" style="grid-column: span 2; width: 100%; margin-top: 30px;" {{ description_block.shopify_attributes }}>
+            <div class="lumu-product-tabs">
+              <div class="lumu-tab-header">
+                <button class="lumu-tab-trigger active" onclick="lumuOpenTab(event, 'lumu-tab-desc')">Description</button>
+                <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-specs')">Specifications</button>
+                <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-shipping')">Shipping & Returns</button>
+              </div>
+              
+              <div class="lumu-tab-content active" id="lumu-tab-desc">
+                <div class="lumu-description-wrapper truncated">
+                  <div class="lumu-description-content rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
+                    {%- if product.description != blank -%}
+                      {{ product.description }}
+                    {%- else -%}
+                      <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
+                    {%- endif -%}
+                  </div>
+                  <div class="lumu-description-fade"></div>
+                </div>
+                <button class="lumu-show-more-btn" onclick="lumuToggleDescription()">
+                  Show More
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 12px; height: 12px; transition: transform 0.2s;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div class="lumu-tab-content" id="lumu-tab-specs">
+                <div class="lumu-specs-table">
+                  <div class="lumu-spec-row"><span class="spec-label">Brand</span><span class="spec-value">{{ product.vendor | default: 'Lumu Premium' }}</span></div>
+                  <div class="lumu-spec-row"><span class="spec-label">SKU</span><span class="spec-value">{{ product.selected_or_first_available_variant.sku | default: 'LUMU-PROD-NEW' }}</span></div>
+                  <div class="lumu-spec-row"><span class="spec-label">Availability</span><span class="spec-value">{% if product.selected_or_first_available_variant.available %}In Stock{% else %}Out of Stock{% endif %}</span></div>
+                  <div class="lumu-spec-row"><span class="spec-label">Shipping</span><span class="spec-value">Ships across the USA in 3-5 business days</span></div>
+                  <div class="lumu-spec-row"><span class="spec-label">Returns</span><span class="spec-value">30-day domestic return policy</span></div>
+                </div>
+              </div>
+              
+              <div class="lumu-tab-content" id="lumu-tab-shipping">
+                <div class="rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
+                  <p><strong>🇺🇸 Domestic US Shipping:</strong> We offer tracked shipping across the United States. Standard delivery takes 3-5 business days.</p>
+                  <p><strong>🔄 30-Day Returns:</strong> If you are not entirely satisfied with your purchase, you can return it within 30 days of delivery. No questions asked!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <script>
+            function lumuOpenTab(evt, tabId) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("lumu-tab-content");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+              }
+              tablinks = document.getElementsByClassName("lumu-tab-trigger");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+              }
+              document.getElementById(tabId).classList.add("active");
+              evt.currentTarget.classList.add("active");
+            }
+
+            function lumuToggleDescription() {
+              var wrapper = document.querySelector('.lumu-description-wrapper');
+              var btn = document.querySelector('.lumu-show-more-btn');
+              if (wrapper.classList.contains('truncated')) {
+                wrapper.classList.remove('truncated');
+                wrapper.classList.add('expanded');
+                btn.innerHTML = 'Show Less <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 12px; height: 12px; transform: rotate(180deg);"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>';
+              } else {
+                wrapper.classList.remove('expanded');
+                wrapper.classList.add('truncated');
+                btn.innerHTML = 'Show More <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 12px; height: 12px;"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>';
+              }
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+              var content = document.querySelector('.lumu-description-content');
+              var wrapper = document.querySelector('.lumu-description-wrapper');
+              var btn = document.querySelector('.lumu-show-more-btn');
+              if (content && wrapper && btn) {
+                if (content.offsetHeight <= 220) {
+                  wrapper.classList.remove('truncated');
+                  btn.style.display = 'none';
+                }
+              }
+            });
+          </script>
+        {%- endif -%}
       </div>
-    </div>
 
     {% render 'product-media-modal', variant_images: variant_images %}
 
