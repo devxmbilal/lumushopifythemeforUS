@@ -10,13 +10,7 @@
 {
   "current": {
     "content_for_index": [],
-    "blocks": {
-      "13017476918150166000": {
-        "type": "shopify://apps/wa-chat-button/blocks/whatsapp/f4d01795-3d1a-4ac7-bca7-9d0d178df50e",
-        "disabled": false,
-        "settings": {}
-      }
-    }
+    "blocks": {}
   },
   "presets": null
 }

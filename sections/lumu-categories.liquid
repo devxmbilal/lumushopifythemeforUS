@@ -80,17 +80,20 @@
           assign card_desc = block.settings.description | default: collection_obj.description | strip_html | truncatewords: 8 | default: 'Shop our custom collection'
           
           if block.settings.image != blank
-            assign card_img = block.settings.image | image_url: width: 600
+            assign card_image_obj = block.settings.image
+            assign card_img = card_image_obj | image_url: width: 600
           elsif collection_obj.featured_image != blank
-            assign card_img = collection_obj.featured_image | image_url: width: 600
+            assign card_image_obj = collection_obj.featured_image
+            assign card_img = card_image_obj | image_url: width: 600
           else
+            assign card_image_obj = blank
             assign card_img = blank
           endif
         -%}
         <a href="{{ card_url }}" class="lumu-cat-card" {{ block.shopify_attributes }}>
           <div class="lumu-cat-card__img-wrap">
             {%- if card_img != blank -%}
-              <img src="{{ card_img }}" alt="{{ card_title | escape }}" class="lumu-cat-card__img" loading="lazy">
+              <img src="{{ card_img }}" alt="{{ card_title | escape }}" class="lumu-cat-card__img" loading="lazy" width="{{ card_image_obj.width }}" height="{{ card_image_obj.height }}">
             {%- else -%}
               <div class="lumu-cat-card__img" style="aspect-ratio: 4/3; background: #e2e8f0; display: flex; align-items: center; justify-content: center; color: #a0aec0; font-weight: 500;">
                 No Image
@@ -122,9 +125,9 @@
       {%- endfor -%}
     {%- else -%}
       <!-- Tech & Smart Gadgets -->
-      <a href="/collections/tech-smart-gadgets" class="lumu-cat-card">
+      <a href="{{ routes.collections_url }}/tech-smart-gadgets" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu-hero-2.png' | asset_url }}" alt="Tech & Smart Gadgets" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu-hero-2.png' | asset_url }}" alt="Tech & Smart Gadgets" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -137,9 +140,9 @@
       </a>
 
       <!-- Home & Kitchen Essentials -->
-      <a href="/collections/home-kitchen-essentials" class="lumu-cat-card">
+      <a href="{{ routes.collections_url }}/home-kitchen-essentials" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Home & Kitchen Essentials" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Home & Kitchen Essentials" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -152,9 +155,9 @@
       </a>
 
       <!-- Health & Beauty -->
-      <a href="/collections/health-beauty" class="lumu-cat-card">
+      <a href="{{ routes.collections_url }}/health-beauty" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu-hero-1.png' | asset_url }}" alt="Health & Beauty" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu-hero-1.png' | asset_url }}" alt="Health & Beauty" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -167,9 +170,9 @@
       </a>
 
       <!-- Premium Fashion -->
-      <a href="/collections/premium-fashion-accessories" class="lumu-cat-card">
+      <a href="{{ routes.collections_url }}/premium-fashion-accessories" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu-cat-women.png' | asset_url }}" alt="Premium Fashion Accessories" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu-cat-women.png' | asset_url }}" alt="Premium Fashion Accessories" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -182,9 +185,9 @@
       </a>
 
       <!-- Trending & Viral Finds -->
-      <a href="/collections/trending-viral-finds" class="lumu-cat-card">
+      <a href="{{ routes.collections_url }}/trending-viral-finds" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu-cat-men.png' | asset_url }}" alt="Trending & Viral Finds" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu-cat-men.png' | asset_url }}" alt="Trending & Viral Finds" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -197,9 +200,9 @@
       </a>
 
       <!-- Best Sellers (Flash Deals) -->
-      <a href="/collections/all" class="lumu-cat-card">
+      <a href="{{ routes.all_products_collection_url }}" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
-          <img src="{{ 'lumu-hero-3.png' | asset_url }}" alt="Flash Deals" class="lumu-cat-card__img" loading="lazy">
+          <img src="{{ 'lumu-hero-3.png' | asset_url }}" alt="Flash Deals" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -214,7 +217,7 @@
   </div>
   {%- if section.settings.show_cta -%}
     <div class="lumu-cats__cta">
-      <a href="{{ section.settings.cta_link | default: '/collections' }}">{{ section.settings.cta_label }}</a>
+      <a href="{{ section.settings.cta_link | default: routes.collections_url }}">{{ section.settings.cta_label }}</a>
     </div>
   {%- endif -%}
 </div>

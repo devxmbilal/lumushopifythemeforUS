@@ -502,7 +502,7 @@
                     <span class="svg-wrapper">
                       {{- 'icon-return.svg' | inline_asset_content -}}
                     </span>
-                    <span>7 Day Returns</span>
+                    <span>30 Day Returns</span>
                   </div>
                   <div class="trust-badge">
                     <span class="svg-wrapper">
@@ -627,9 +627,10 @@
                                 {% endif %}
                               >
                                 <ul class="list-unstyled" role="list">
+                                  {%- assign products_to_skip = i | minus: 1 | times: block.settings.products_per_page -%}
                                   {%- for product in recommendations.products
                                     limit: block.settings.products_per_page
-                                    offset: continue
+                                    offset: products_to_skip
                                   -%}
                                     <li>
                                       {%- if block.settings.enable_quick_add -%}
@@ -769,13 +770,7 @@
       <script src="{{ 'product-model.js' | asset_url }}" defer></script>
     {%- endif -%}
 
-    {%- liquid
-      if product.selected_or_first_available_variant.featured_media
-        assign seo_media = product.selected_or_first_available_variant.featured_media
-      else
-        assign seo_media = product.featured_media
-      endif
-    -%}
+
 
     <script type="application/ld+json">
       {{ product | structured_data }}

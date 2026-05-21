@@ -78,61 +78,84 @@
 
 <div class="lumu-slider" id="LumuSlider">
   <div class="lumu-slider__track" id="LumuSliderTrack">
-    <!-- Slide 1 -->
-    <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-1.png' | asset_url }}');">
-      <div class="lumu-slider__overlay"></div>
-      <div class="lumu-slider__content">
-        <h2>Your One-Stop Shop for <em>Everything</em></h2>
-        <p>From fashion to electronics, home essentials to beauty — shop 100+ categories with free delivery across Pakistan.</p>
-        <div>
-          <a href="/collections/all" class="lumu-slider__btn">Shop Now</a>
-          <a href="/collections" class="lumu-slider__btn lumu-slider__btn--outline">Browse Collections</a>
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        <div class="lumu-slider__slide" style="background-image: url('{% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 1920 }}{% else %}{{ 'lumu-hero-' | append: forloop.index | append: '.png' | asset_url }}{% endif %}');" {{ block.shopify_attributes }}>
+          <div class="lumu-slider__overlay"></div>
+          <div class="lumu-slider__content">
+            <h2>{{ block.settings.heading }}</h2>
+            <p>{{ block.settings.text }}</p>
+            <div>
+              {%- if block.settings.button_label != blank -%}
+                <a href="{{ block.settings.button_link | default: routes.all_products_collection_url }}" class="lumu-slider__btn">{{ block.settings.button_label }}</a>
+              {%- endif -%}
+              {%- if block.settings.secondary_button_label != blank -%}
+                <a href="{{ block.settings.secondary_button_link | default: routes.collections_url }}" class="lumu-slider__btn lumu-slider__btn--outline">{{ block.settings.secondary_button_label }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- else -%}
+      <!-- Fallback static slides -->
+      <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-1.png' | asset_url }}');">
+        <div class="lumu-slider__overlay"></div>
+        <div class="lumu-slider__content">
+          <h2>Your One-Stop Shop for <em>Everything</em></h2>
+          <p>From fashion to electronics, home essentials to beauty — shop 100+ categories with free delivery across the United States.</p>
+          <div>
+            <a href="{{ routes.all_products_collection_url }}" class="lumu-slider__btn">Shop Now</a>
+            <a href="{{ routes.collections_url }}" class="lumu-slider__btn lumu-slider__btn--outline">Browse Collections</a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Slide 2 -->
-    <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-2.png' | asset_url }}');">
-      <div class="lumu-slider__overlay"></div>
-      <div class="lumu-slider__content">
-        <h2>Latest Tech & Gadgets</h2>
-        <p>Discover premium earbuds, smartwatches, chargers & more at prices you'll love. All 100% authentic.</p>
-        <div>
-          <a href="/collections/all" class="lumu-slider__btn">Shop Electronics</a>
+      <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-2.png' | asset_url }}');">
+        <div class="lumu-slider__overlay"></div>
+        <div class="lumu-slider__content">
+          <h2>Latest Tech & Gadgets</h2>
+          <p>Discover premium earbuds, smartwatches, chargers & more at prices you'll love. All 100% authentic.</p>
+          <div>
+            <a href="{{ routes.all_products_collection_url }}" class="lumu-slider__btn">Shop Electronics</a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Slide 3 -->
-    <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-3.png' | asset_url }}');">
-      <div class="lumu-slider__overlay"></div>
-      <div class="lumu-slider__content">
-        <h2>Transform Your Space</h2>
-        <p>Premium home & kitchen essentials delivered to your door. Bedding, décor, cookware & more.</p>
-        <div>
-          <a href="/collections/all" class="lumu-slider__btn">Shop Home</a>
-          <a href="/collections" class="lumu-slider__btn lumu-slider__btn--outline">View All</a>
+      <div class="lumu-slider__slide" style="background-image: url('{{ 'lumu-hero-3.png' | asset_url }}');">
+        <div class="lumu-slider__overlay"></div>
+        <div class="lumu-slider__content">
+          <h2>Transform Your Space</h2>
+          <p>Premium home & kitchen essentials delivered to your door. Bedding, décor, cookware & more.</p>
+          <div>
+            <a href="{{ routes.all_products_collection_url }}" class="lumu-slider__btn">Shop Home</a>
+            <a href="{{ routes.collections_url }}" class="lumu-slider__btn lumu-slider__btn--outline">View All</a>
+          </div>
         </div>
       </div>
-    </div>
+    {%- endif -%}
   </div>
 
-  <button class="lumu-slider__arrow lumu-slider__arrow--prev" onclick="lumuSlide(-1)">&#10094;</button>
-  <button class="lumu-slider__arrow lumu-slider__arrow--next" onclick="lumuSlide(1)">&#10095;</button>
+  {%- assign slide_count = section.blocks.size -%}
+  {%- if slide_count == 0 -%}{%- assign slide_count = 3 -%}{%- endif -%}
+  {%- if slide_count > 1 -%}
+    <button class="lumu-slider__arrow lumu-slider__arrow--prev" onclick="lumuSlide(-1)">&#10094;</button>
+    <button class="lumu-slider__arrow lumu-slider__arrow--next" onclick="lumuSlide(1)">&#10095;</button>
 
-  <div class="lumu-slider__nav" id="LumuSliderNav">
-    <button class="lumu-slider__dot active" onclick="lumuGoTo(0)"></button>
-    <button class="lumu-slider__dot" onclick="lumuGoTo(1)"></button>
-    <button class="lumu-slider__dot" onclick="lumuGoTo(2)"></button>
-  </div>
+    <div class="lumu-slider__nav" id="LumuSliderNav">
+      {%- for i in (1..slide_count) -%}
+        <button class="lumu-slider__dot{% if forloop.first %} active{% endif %}" onclick="lumuGoTo({{ forloop.index0 }})"></button>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 </div>
 
 <script>
   (function() {
     let current = 0;
-    const total = 3;
+    const total = {{ slide_count }};
     const track = document.getElementById('LumuSliderTrack');
     const dots = document.querySelectorAll('.lumu-slider__dot');
 
     function updateSlider() {
+      if (!track) return;
       track.style.transform = 'translateX(-' + (current * 100) + '%)';
       dots.forEach((d, i) => d.classList.toggle('active', i === current));
     }
@@ -147,7 +170,8 @@
       updateSlider();
     };
 
-    setInterval(() => { window.lumuSlide(1); }, 5000);
+    {%- assign autoplay_speed = section.settings.autoplay_speed | default: 5 -%}
+    setInterval(() => { window.lumuSlide(1); }, {{ autoplay_speed | times: 1000 }});
   })();
 </script>
 
@@ -156,10 +180,95 @@
   "name": "Lumu Hero Slider",
   "tag": "section",
   "class": "section",
-  "settings": [],
+  "settings": [
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Autoplay Speed",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Your One-Stop Shop for Everything"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "From fashion to electronics, home essentials to beauty — shop 100+ categories with free delivery across the United States."
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Primary Button Label",
+          "default": "Shop Now"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Primary Button Link"
+        },
+        {
+          "type": "text",
+          "id": "secondary_button_label",
+          "label": "Secondary Button Label (Optional)"
+        },
+        {
+          "type": "url",
+          "id": "secondary_button_link",
+          "label": "Secondary Button Link"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Lumu Hero Slider"
+      "name": "Lumu Hero Slider",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Your One-Stop Shop for <em>Everything</em>",
+            "text": "From fashion to electronics, home essentials to beauty — shop 100+ categories with free delivery across the United States.",
+            "button_label": "Shop Now",
+            "secondary_button_label": "Browse Collections"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Latest Tech & Gadgets",
+            "text": "Discover premium earbuds, smartwatches, chargers & more at prices you'll love. All 100% authentic.",
+            "button_label": "Shop Electronics"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "heading": "Transform Your Space",
+            "text": "Premium home & kitchen essentials delivered to your door. Bedding, décor, cookware & more.",
+            "button_label": "Shop Home",
+            "secondary_button_label": "View All"
+          }
+        }
+      ]
     }
   ]
 }

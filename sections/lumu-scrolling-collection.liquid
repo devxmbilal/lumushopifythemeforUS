@@ -161,7 +161,7 @@
     let startX;
     let scrollLeft;
     let animationId;
-    let scrollSpeed = 1; // Pixels per frame
+    let scrollSpeed = {{ section.settings.scroll_speed | default: 1 }}; // Pixels per frame
 
     const tracks = wrapper.querySelectorAll('.lumu-collection-marquee-track');
     if (tracks.length < 2) return;
@@ -328,6 +328,15 @@
       "id": "full_width",
       "label": "t:sections.featured-collection.settings.full_width.label",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "scroll_speed",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Scroll Speed (px/frame)",
+      "default": 1
     },
     {
       "type": "range",

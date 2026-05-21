@@ -27,7 +27,7 @@
             <a href="{{ product.url }}" class="lumu-pfp__card">
               <div class="lumu-pfp__card-img-wrap">
                 {%- if product.featured_image != blank -%}
-                  <img src="{{ product.featured_image | image_url: width: 600, height: 600, crop: 'center' }}" alt="{{ product.title | escape }}" class="lumu-pfp__card-img" loading="lazy">
+                  <img src="{{ product.featured_image | image_url: width: 600, height: 600, crop: 'center' }}" alt="{{ product.title | escape }}" class="lumu-pfp__card-img" loading="lazy" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
                 {%- else -%}
                   <div class="lumu-pfp__card-img" style="background:#f0f0f5;"></div>
                 {%- endif -%}

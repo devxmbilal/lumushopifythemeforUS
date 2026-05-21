@@ -81,10 +81,10 @@
   <div class="lumu-bs__inner">
     <div class="lumu-bs__img-wrapper">
       {%- if section.settings.image != blank -%}
-        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | default: section.settings.title | escape }}" class="lumu-bs__img" loading="lazy">
+        <img src="{{ section.settings.image | image_url: width: 1000 }}" alt="{{ section.settings.image.alt | default: section.settings.title | escape }}" class="lumu-bs__img" loading="lazy" width="{{ section.settings.image.width }}" height="{{ section.settings.image.height }}">
       {%- else -%}
         <!-- Using a highly premium portrait lifestyle image specifically generated for Lumu's Curated Excellence -->
-        <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Lumu Curated Excellence" class="lumu-bs__img" loading="lazy">
+        <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Lumu Curated Excellence" class="lumu-bs__img" loading="lazy" width="600" height="800">
       {%- endif -%}
     </div>
     
