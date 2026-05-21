@@ -114,6 +114,43 @@
                     price_class: 'price--large'
                   -%}
                 </div>
+                
+                <!-- Premium E-commerce Indicators -->
+                <div class="lumu-product-indicators">
+                  <div class="lumu-indicator-pill processing-time">
+                    <span class="lumu-indicator-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </span>
+                    <span class="lumu-indicator-text"><strong>Estimated Processing Time:</strong> 1-2 days for 90% orders</span>
+                  </div>
+                  <div class="lumu-indicator-pill shipping-fee">
+                    <span class="lumu-indicator-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" style="width: 15px; height: 15px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                      </svg>
+                    </span>
+                    <span class="lumu-indicator-text"><strong>Shipping Fee:</strong> $3.00 (Free above $50)</span>
+                  </div>
+                  <div class="lumu-indicator-pill stock-status" id="stock-status-{{ section.id }}">
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      <span class="lumu-indicator-icon checkmark">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#10b981" stroke-width="3" style="width: 14px; height: 14px;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <span class="lumu-indicator-text" style="color: #10b981; font-weight: 700;">In Stock</span>
+                    {%- else -%}
+                      <span class="lumu-indicator-icon xmark">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#ef4444" stroke-width="3" style="width: 14px; height: 14px;">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </span>
+                      <span class="lumu-indicator-text" style="color: #ef4444; font-weight: 700;">Out of Stock</span>
+                    {%- endif -%}
+                  </div>
+                </div>
                 {%- if product.quantity_price_breaks_configured? -%}
                   <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
                     <span>{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -192,16 +229,57 @@
                   {%- endif -%}
                 </p>
               {%- when 'description' -%}
-                {%- if product.description != blank -%}
-                  <div class="product__description rte" style="font-size: 1.6rem; color: var(--lumu-text-light); line-height: 1.6;" {{ block.shopify_attributes }}>
-                    {{ product.description }}
+                <!-- Premium Modern E-commerce Tabs -->
+                <div class="lumu-product-tabs" {{ block.shopify_attributes }}>
+                  <div class="lumu-tab-header">
+                    <button class="lumu-tab-trigger active" onclick="lumuOpenTab(event, 'lumu-tab-desc')">Description</button>
+                    <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-specs')">Specifications</button>
+                    <button class="lumu-tab-trigger" onclick="lumuOpenTab(event, 'lumu-tab-shipping')">Shipping & Returns</button>
                   </div>
-                {%- else -%}
-                   <!-- Fallback if no description exists -->
-                  <div class="product__description rte" style="font-size: 1.6rem; color: var(--lumu-text-light); line-height: 1.6;" {{ block.shopify_attributes }}>
-                    <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
+                  
+                  <div class="lumu-tab-content active" id="lumu-tab-desc">
+                    <div class="rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
+                      {%- if product.description != blank -%}
+                        {{ product.description }}
+                      {%- else -%}
+                        <p>Experience the perfect blend of style, comfort, and premium quality. Our products are meticulously crafted to meet the highest standards. Order yours today!</p>
+                      {%- endif -%}
+                    </div>
                   </div>
-                {%- endif -%}
+                  
+                  <div class="lumu-tab-content" id="lumu-tab-specs">
+                    <div class="lumu-specs-table">
+                      <div class="lumu-spec-row"><span class="spec-label">Brand</span><span class="spec-value">{{ product.vendor | default: 'Lumu Premium' }}</span></div>
+                      <div class="lumu-spec-row"><span class="spec-label">SKU</span><span class="spec-value">{{ product.selected_or_first_available_variant.sku | default: 'LUMU-PROD-NEW' }}</span></div>
+                      <div class="lumu-spec-row"><span class="spec-label">Availability</span><span class="spec-value">{% if product.selected_or_first_available_variant.available %}In Stock{% else %}Out of Stock{% endif %}</span></div>
+                      <div class="lumu-spec-row"><span class="spec-label">Shipping</span><span class="spec-value">Ships across the USA in 3-5 business days</span></div>
+                      <div class="lumu-spec-row"><span class="spec-label">Returns</span><span class="spec-value">30-day domestic return policy</span></div>
+                    </div>
+                  </div>
+                  
+                  <div class="lumu-tab-content" id="lumu-tab-shipping">
+                    <div class="rte" style="font-size: 1.45rem; color: var(--lumu-text-light); line-height: 1.6;">
+                      <p><strong>🇺🇸 Domestic US Shipping:</strong> We offer tracked shipping across the United States. Standard delivery takes 3-5 business days.</p>
+                      <p><strong>🔄 30-Day Returns:</strong> If you are not entirely satisfied with your purchase, you can return it within 30 days of delivery. No questions asked!</p>
+                    </div>
+                  </div>
+                </div>
+                
+                <script>
+                  function lumuOpenTab(evt, tabId) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("lumu-tab-content");
+                    for (i = 0; i < tabcontent.length; i++) {
+                      tabcontent[i].classList.remove("active");
+                    }
+                    tablinks = document.getElementsByClassName("lumu-tab-trigger");
+                    for (i = 0; i < tablinks.length; i++) {
+                      tablinks[i].classList.remove("active");
+                    }
+                    document.getElementById(tabId).classList.add("active");
+                    evt.currentTarget.classList.add("active");
+                  }
+                </script>
               {%- when 'sku' -%}
                 <p
                   class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
@@ -301,6 +379,11 @@
                         </span>
                       </button>
                     </quantity-input>
+                    {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' and product.selected_or_first_available_variant.inventory_quantity > 0 -%}
+                      <span class="lumu-available-count">
+                        {{ product.selected_or_first_available_variant.inventory_quantity }} available
+                      </span>
+                    {%- endif -%}
                     {%- liquid
                       assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
                       assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
@@ -493,22 +576,31 @@
               {%- when 'trust_badges' -%}
                 <div class="product-trust-badges" {{ block.shopify_attributes }}>
                   <div class="trust-badge">
-                    <span class="svg-wrapper">
-                      {{- 'icon-success.svg' | inline_asset_content -}}
+                    <span class="svg-wrapper" style="color: #10b981;">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
                     </span>
-                    <span>100% Original</span>
+                    <span>Secure Payment</span>
+                    <span class="badge-subtitle">SSL encrypted</span>
                   </div>
                   <div class="trust-badge">
-                    <span class="svg-wrapper">
-                      {{- 'icon-return.svg' | inline_asset_content -}}
+                    <span class="svg-wrapper" style="color: #10b981;">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V8a2 2 0 00-2-2h-.5A2 2 0 0113 4V3.935M12 20a8 8 0 100-16 8 8 0 000 16z" />
+                      </svg>
                     </span>
-                    <span>30 Day Returns</span>
+                    <span>Global Shipping</span>
+                    <span class="badge-subtitle">Tracked delivery</span>
                   </div>
                   <div class="trust-badge">
-                    <span class="svg-wrapper">
-                      {{- 'icon-truck.svg' | inline_asset_content -}}
+                    <span class="svg-wrapper" style="color: #10b981;">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H18v3z" />
+                      </svg>
                     </span>
-                    <span>Fast Delivery</span>
+                    <span>Easy Returns</span>
+                    <span class="badge-subtitle">30-day policy</span>
                   </div>
                 </div>
               {%- when 'lumu_urgency' -%}
