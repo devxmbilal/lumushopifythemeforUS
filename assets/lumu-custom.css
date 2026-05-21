@@ -3194,7 +3194,9 @@ details[open] .search-modal__content {
 /* 2. HIDE SLIDER ARROWS WHEN DRAWER IS OPEN */
 details[open].menu-opening~.header__heading~.header__inline-menu~.header__icons,
 .menu-drawer-container[open]~* .slideshow__controls,
-.menu-drawer-container[open]~* .slider-button {
+.menu-drawer-container[open]~* .slider-button,
+.section-header.menu-open ~ * .lumu-slider__arrow,
+.section-header.menu-open ~ * .lumu-slider__nav {
   z-index: 0 !important;
 }
 
@@ -3202,6 +3204,12 @@ details[open].menu-opening~.header__heading~.header__inline-menu~.header__icons,
 .slider-button,
 .slideshow__controls .slider-button {
   z-index: 2 !important;
+}
+
+/* Raise section header stacking context when menu drawer is open on mobile */
+.section-header.menu-open {
+  z-index: 99999 !important;
+  position: relative !important;
 }
 
 /* 3. NAV ITEMS — WHITE TEXT ON PURPLE */
