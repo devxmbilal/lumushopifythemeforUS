@@ -3430,7 +3430,7 @@ summary.header__menu-item span {
     max-width: 100% !important;
   }
 
-  /* Horizontal layout for thumbnail list - Limit to 6 items and scroll if more */
+  /* Horizontal layout for thumbnail list - Limit to 6 items and scroll if more (Scrollbar Hidden) */
   .thumbnail-slider .thumbnail-list.slider--tablet-up {
     display: flex !important;
     flex-direction: row !important;
@@ -3443,24 +3443,13 @@ summary.header__menu-item span {
     max-width: 536px !important; /* 6 items * 76px + 5 gaps * 12px + padding ~ 536px */
     margin: 0 auto !important;
     overflow-x: auto !important;
-    scrollbar-width: thin !important;
-    scrollbar-color: #00966c #f3f4f6 !important;
+    scrollbar-width: none !important; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none !important; /* Hide scrollbar in IE/Edge */
   }
 
-  /* Show webkit scrollbar on desktop for thumbnails */
+  /* Hide webkit scrollbar on desktop for thumbnails */
   .thumbnail-slider .thumbnail-list.slider--tablet-up::-webkit-scrollbar {
-    height: 5px !important;
-    display: block !important;
-  }
-
-  .thumbnail-slider .thumbnail-list.slider--tablet-up::-webkit-scrollbar-track {
-    background: #f3f4f6 !important;
-    border-radius: 10px !important;
-  }
-
-  .thumbnail-slider .thumbnail-list.slider--tablet-up::-webkit-scrollbar-thumb {
-    background-color: #00966c !important;
-    border-radius: 10px !important;
+    display: none !important;
   }
 
   /* Keep each thumbnail small and perfectly sized */
@@ -3589,7 +3578,7 @@ media-gallery {
 .price--large {
   font-size: 2.8rem !important;
   font-weight: 800 !important;
-  color: #111827 !important;
+  color: #6755B9 !important; /* Brand purple */
   letter-spacing: -0.03em !important;
   display: flex !important;
   align-items: center !important;
@@ -3598,7 +3587,7 @@ media-gallery {
 
 .price--large .price-item--regular,
 .price--large .price-item--sale {
-  color: #111827 !important;
+  color: #6755B9 !important; /* Brand purple */
 }
 
 /* Premium trust indicators below price */
