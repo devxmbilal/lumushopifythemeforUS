@@ -3230,11 +3230,14 @@ details[open].menu-opening~.header__heading~.header__inline-menu~.header__icons,
   z-index: 2 !important;
 }
 
-/* Raise section header stacking context when menu drawer is open on mobile */
-.section-header.menu-open {
+/* Raise section header stacking context when menu drawer or search modal is open on mobile */
+.section-header.menu-open,
+.section-header:has(details-modal details[open]),
+.shopify-section-group-header-group:has(details-modal details[open]) {
   z-index: 99999 !important;
   position: relative !important;
 }
+
 
 /* 3. NAV ITEMS — WHITE TEXT ON PURPLE */
 .menu-drawer__menu-item {
