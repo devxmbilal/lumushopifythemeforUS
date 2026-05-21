@@ -1313,6 +1313,7 @@ html {
 
 .lumu-pfp__card {
   width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box !important;
   background: #ffffff !important;
   border-radius: 16px !important;
@@ -1359,6 +1360,7 @@ html {
 
 .lumu-pfp__card-body {
   width: 100% !important;
+  max-width: 100% !important;
   box-sizing: border-box !important;
   padding: 20px !important;
   display: flex !important;
@@ -1368,12 +1370,23 @@ html {
   justify-content: center;
 }
 
+.lumu-pfp__card-body > div {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
 .lumu-pfp__card-body form {
   width: 100% !important;
+  max-width: 100% !important;
   display: block !important;
+  box-sizing: border-box !important;
 }
 
 .lumu-pfp__reviews {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -1396,6 +1409,11 @@ html {
 }
 
 .lumu-pfp__card-name {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
   font-size: 1.5rem !important;
   font-weight: 700 !important;
   color: #1a1a2e;
@@ -1414,6 +1432,9 @@ html {
 }
 
 .lumu-pfp__card-price {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   font-size: 1.6rem !important;
   font-weight: 800 !important;
   color: #8577C7 !important;
@@ -1431,7 +1452,9 @@ html {
 
 .lumu-pfp__atc-btn {
   margin-top: auto;
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   cursor: pointer;
   padding: 12px;
   background: white !important;
@@ -1472,13 +1495,29 @@ html {
 
   .lumu-pfp__card-body {
     padding: 14px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .lumu-pfp__card-body > div,
+  .lumu-pfp__card-body form {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .lumu-pfp__card-name {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     font-size: 1.35rem !important;
   }
 
   .lumu-pfp__atc-btn {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     font-size: 1.15rem !important;
     padding: 10px !important;
   }
