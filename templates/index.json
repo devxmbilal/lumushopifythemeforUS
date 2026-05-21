@@ -15,11 +15,23 @@
     },
     "lumu_categories": {
       "type": "lumu-categories",
-      "settings": {}
+      "settings": {
+        "title": "Shop By Category",
+        "show_cta": true,
+        "cta_label": "Browse All Departments",
+        "cta_link": ""
+      }
     },
     "lumu_trending_products": {
       "type": "lumu-footer-products",
-      "settings": {}
+      "settings": {
+        "title": "Trending Now",
+        "collection": "",
+        "products_to_show": 4,
+        "products_offset": 0,
+        "button_label": "Shop All Products",
+        "button_link": "shopify://collections/all"
+      }
     },
     "lumu_all_products": {
       "type": "lumu-scrolling-collection",
@@ -45,7 +57,7 @@
     "lumu_tech_gadgets": {
       "type": "featured-collection",
       "settings": {
-        "collection": "tech-samrt-gadget",
+        "collection": "tech-smart-gadgets",
         "products_to_show": 4,
         "title": "Tech & Smart Gadgets",
         "heading_size": "h2",
@@ -73,7 +85,7 @@
     "lumu_home_kitchen": {
       "type": "featured-collection",
       "settings": {
-        "collection": "home-kitchen-essentails",
+        "collection": "home-kitchen-essentials",
         "products_to_show": 4,
         "title": "Home & Kitchen Essentials",
         "heading_size": "h2",
@@ -194,11 +206,16 @@
     },
     "lumu_customer_reviews": {
       "type": "lumu-customer-reviews",
-      "settings": {}
+      "settings": {
+        "title": "Loved by Thousands of Women",
+        "subtitle": "Discover why Lumu is the top choice for Premium Fashion & Kids Essentials in the US"
+      }
     },
     "lumu_trust_features": {
       "type": "lumu-trust-features",
-      "settings": {}
+      "settings": {
+        "title": "Why Shop With Lumu?"
+      }
     },
     "lumu_newsletter": {
       "type": "newsletter",
