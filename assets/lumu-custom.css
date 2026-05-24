@@ -4293,4 +4293,187 @@ quantity-input.quantity .quantity__input {
   }
 }
 
+/* ============================================================================
+   UK-STYLE PDP DESCRIPTION & GALLERY ENHANCEMENTS
+   ============================================================================ */
+.lumu-description-content .pdp-desc-lead {
+  display: inline;
+  color: #121212;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.lumu-description-content ul,
+.lumu-description-content ol {
+  padding-left: 20px !important;
+  margin: 0 0 15px !important;
+  color: var(--lumu-text-light, #5e5e5e) !important;
+}
+
+.lumu-description-content ul {
+  list-style: disc !important;
+}
+
+.lumu-description-content li {
+  margin-bottom: 6px !important;
+}
+
+.lumu-description-content li::marker {
+  color: #747878 !important;
+}
+
+.lumu-description-content > img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  margin: 20px 0 !important;
+}
+
+.product-page__desc-gallery {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)) !important;
+  gap: 16px !important;
+  margin: 24px 0 !important;
+  width: 100% !important;
+}
+
+.product-page__desc-gallery--single {
+  grid-template-columns: 1fr !important;
+  max-width: min(100%, 640px) !important;
+}
+
+.product-page__desc-gallery p {
+  margin: 0 !important;
+}
+
+.product-page__desc-gallery img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  object-fit: cover !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  background: #f5f3ef !important;
+}
+
+@media (max-width: 640px) {
+  .product-page__desc-gallery {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* ============================================================================
+   UK-STYLE PREMIUM SEARCH RESULTS PAGE
+   ============================================================================ */
+/* Center and make the search box smaller on the search results page */
+.template-search__search {
+  max-width: 580px !important;
+  margin: 30px auto 50px auto !important;
+  width: 100% !important;
+  padding: 0 15px !important;
+}
+
+.template-search__search .search {
+  display: flex !important;
+  position: relative !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.template-search__search .field {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  gap: 8px !important;
+}
+
+.template-search__search .search__input {
+  flex: 1 !important;
+  padding: 14px 24px !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 999px !important;
+  background: #ffffff !important;
+  outline: none !important;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03) !important;
+  font-size: 1.4rem !important;
+  color: #121212 !important;
+  height: 48px !important;
+}
+
+.template-search__search .search__input:focus {
+  border-color: var(--lumu-purple) !important;
+  box-shadow: 0 0 0 3px rgba(133, 119, 199, 0.12) !important;
+}
+
+.template-search__search .field__label {
+  display: none !important; /* Hide floating label to make it clean like UK theme */
+}
+
+.template-search__search .search__button {
+  height: 48px !important;
+  padding: 0 30px !important;
+  border-radius: 999px !important;
+  background: var(--lumu-purple) !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: background 0.25s ease, transform 0.15s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: static !important; /* Remove absolute positioning */
+  width: auto !important;
+}
+
+.template-search__search .search__button:hover {
+  background: var(--lumu-purple-dark) !important;
+}
+
+.template-search__search .search__button:active {
+  transform: scale(0.98) !important;
+}
+
+.template-search__search .search__button .svg-wrapper {
+  display: none !important; /* We use text like the UK theme button */
+}
+
+.template-search__search .search__button::after {
+  content: "Search" !important;
+  display: inline-block !important;
+}
+
+.template-search__search .reset__button {
+  right: 110px !important; /* Position reset button nicely inside input */
+}
+
+/* ============================================================================
+   HEADER DRAWER & POPUP SOCIAL CIRCULAR BUTTONS
+   ============================================================================ */
+.list-social__link {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  color: var(--color-text, #121212) !important;
+  transition: all 0.25s ease !important;
+  background: #ffffff !important;
+}
+
+.list-social__link:hover {
+  color: var(--lumu-purple) !important;
+  border-color: var(--lumu-purple) !important;
+  background: rgba(133, 119, 199, 0.04) !important;
+  transform: scale(1.05) !important;
+}
+
 

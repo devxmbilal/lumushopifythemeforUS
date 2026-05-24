@@ -140,10 +140,21 @@
                 {%- endif -%}
               </div>
             {%- endif -%}
+            {%- liquid
+              assign social_facebook = settings.social_facebook_link | default: "https://www.facebook.com/profile.php?id=61589395702816"
+              assign social_instagram = settings.social_instagram_link | default: "https://www.instagram.com/aitch.global/"
+              assign social_twitter = settings.social_twitter_link
+              assign social_pinterest = settings.social_pinterest_link
+              assign social_youtube = settings.social_youtube_link
+              assign social_tiktok = settings.social_tiktok_link
+              assign social_tumblr = settings.social_tumblr_link
+              assign social_snapchat = settings.social_snapchat_link
+              assign social_vimeo = settings.social_vimeo_link
+            -%}
             <ul class="list list-social list-unstyled" role="list">
-              {%- if settings.social_twitter_link != blank -%}
+              {%- if social_twitter != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_twitter_link }}" class="list-social__link link">
+                  <a href="{{ social_twitter }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-twitter.svg' | inline_asset_content -}}
                     </span>
@@ -151,9 +162,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_facebook_link != blank -%}
+              {%- if social_facebook != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_facebook_link }}" class="list-social__link link">
+                  <a href="{{ social_facebook }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-facebook.svg' | inline_asset_content -}}
                     </span>
@@ -161,9 +172,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_pinterest_link != blank -%}
+              {%- if social_pinterest != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_pinterest_link }}" class="list-social__link link">
+                  <a href="{{ social_pinterest }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-pinterest.svg' | inline_asset_content -}}
                     </span>
@@ -171,9 +182,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_instagram_link != blank -%}
+              {%- if social_instagram != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_instagram_link }}" class="list-social__link link">
+                  <a href="{{ social_instagram }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-instagram.svg' | inline_asset_content -}}
                     </span>
@@ -181,9 +192,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_tiktok_link != blank -%}
+              {%- if social_tiktok != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_tiktok_link }}" class="list-social__link link">
+                  <a href="{{ social_tiktok }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-tiktok.svg' | inline_asset_content -}}
                     </span>
@@ -191,9 +202,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_tumblr_link != blank -%}
+              {%- if social_tumblr != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_tumblr_link }}" class="list-social__link link">
+                  <a href="{{ social_tumblr }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-tumblr.svg' | inline_asset_content -}}
                     </span>
@@ -201,9 +212,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_snapchat_link != blank -%}
+              {%- if social_snapchat != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_snapchat_link }}" class="list-social__link link">
+                  <a href="{{ social_snapchat }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-snapchat.svg' | inline_asset_content -}}
                     </span>
@@ -211,9 +222,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_youtube_link != blank -%}
+              {%- if social_youtube != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_youtube_link }}" class="list-social__link link">
+                  <a href="{{ social_youtube }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-youtube.svg' | inline_asset_content -}}
                     </span>
@@ -221,9 +232,9 @@
                   </a>
                 </li>
               {%- endif -%}
-              {%- if settings.social_vimeo_link != blank -%}
+              {%- if social_vimeo != blank -%}
                 <li class="list-social__item">
-                  <a href="{{ settings.social_vimeo_link }}" class="list-social__link link">
+                  <a href="{{ social_vimeo }}" class="list-social__link link">
                     <span class="svg-wrapper">
                       {{- 'icon-vimeo.svg' | inline_asset_content -}}
                     </span>

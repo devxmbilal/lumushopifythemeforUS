@@ -885,6 +885,69 @@
                   btn.style.display = 'none';
                 }
               }
+
+              // UK PDP Description Parser
+              if (content) {
+                function isImgOnlyP(el) {
+                  if (!el || el.tagName !== 'P') return false;
+                  var imgs = el.querySelectorAll('img');
+                  if (imgs.length !== 1) return false;
+                  var tmp = el.cloneNode(true);
+                  tmp.querySelectorAll('img').forEach(function (img) {
+                    img.remove();
+                  });
+                  return tmp.textContent.replace(/\s/g, '') === '';
+                }
+
+                function wrapDescImages(container) {
+                  var node = container.firstElementChild;
+                  while (node) {
+                    if (!isImgOnlyP(node)) {
+                      node = node.nextElementSibling;
+                      continue;
+                    }
+                    var anchor = node;
+                    var scan = node;
+                    while (isImgOnlyP(scan)) {
+                      scan = scan.nextElementSibling;
+                    }
+                    var wrap = document.createElement('div');
+                    wrap.className = 'product-page__desc-gallery';
+                    var count = 0;
+                    container.insertBefore(wrap, anchor);
+                    while (anchor !== scan) {
+                      var next = anchor.nextElementSibling;
+                      wrap.appendChild(anchor);
+                      anchor = next;
+                      count++;
+                    }
+                    if (count === 1) wrap.classList.add('product-page__desc-gallery--single');
+                    node = scan;
+                  }
+                }
+
+                function boldLeadLabels(container) {
+                  container.querySelectorAll('p, li').forEach(function (el) {
+                    if (el.closest('.product-page__desc-gallery')) return;
+                    if (el.querySelector('.pdp-desc-lead')) return;
+                    var first = el.firstChild;
+                    if (!first || first.nodeType !== 3) return;
+                    var t = first.textContent;
+                    var m = t.match(/^(\s*)([^:]+:)(\s*)([\s\S]*)$/);
+                    if (!m || m[2].length < 3 || m[2].length > 95) return;
+                    if (/^https?:\/\//i.test(t.trim())) return;
+                    var strong = document.createElement('strong');
+                    strong.className = 'pdp-desc-lead';
+                    strong.textContent = m[2];
+                    el.insertBefore(strong, first);
+                    first.textContent = m[3] + m[4];
+                    if (!first.textContent) el.removeChild(first);
+                  });
+                }
+
+                wrapDescImages(content);
+                boldLeadLabels(content);
+              }
             });
           </script>
         {%- endif -%}
