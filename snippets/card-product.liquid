@@ -6,9 +6,6 @@
 <div class="card-wrapper product-card-wrapper" style="height: 100%;">
   <a href="{{ card_product.url }}" class="card lumu-pfp__card">
     <div class="lumu-pfp__card-img-wrap card__inner">
-      {%- if show_limited_stock_badge -%}
-        <span class="product-card__ribbon product-card__ribbon--limited">Limited Stock</span>
-      {%- endif -%}
       {%- if card_product.featured_media -%}
         <!-- Force 1:1 Aspect Ratio constraint globally to fix oversized tall images -->
         <img src="{{ card_product.featured_media | image_url: width: 600, height: 600, crop: 'center' }}" alt="{{ card_product.title | escape }}" class="lumu-pfp__card-img" loading="lazy">
