@@ -905,6 +905,93 @@ span.price-item.price-item--sale.price-item--last {
   background: rgba(255, 255, 255, 0.85) !important;
 }
 
+/* Mobile filter drawer: full-screen overlay above header */
+@media screen and (max-width: 989px) {
+  .mobile-facets {
+    z-index: 10001 !important;
+    position: fixed !important;
+    inset: 0 !important;
+  }
+
+  .mobile-facets__wrapper .disclosure-has-popup[open]>summary::before,
+  .facets .mobile-facets__wrapper .disclosure-has-popup[open]>summary::before {
+    background: rgba(0, 0, 0, 0.55) !important;
+    z-index: 10000 !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+  }
+
+  .mobile-facets__inner {
+    background: #ffffff !important;
+    z-index: 10002 !important;
+    border-left: none !important;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.18) !important;
+    width: min(37.5rem, calc(100% - 2rem)) !important;
+  }
+
+  .mobile-facets__header,
+  .mobile-facets__main,
+  .mobile-facets__submenu,
+  .mobile-facets__footer {
+    background: #ffffff !important;
+  }
+
+  .mobile-facets__header {
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+    padding: 1.2rem 1.5rem !important;
+    text-align: left !important;
+    position: sticky !important;
+    top: 0 !important;
+  }
+
+  .mobile-facets__header-inner {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobile-facets__header-close {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    border: none;
+    background: #f3f3f3;
+    border-radius: 50%;
+    cursor: pointer;
+    color: #121212;
+  }
+
+  .mobile-facets__header-close .svg-wrapper {
+    width: 1.6rem;
+    height: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobile-facets__header-close:hover,
+  .mobile-facets__header-close:focus-visible {
+    background: #e8e8e8;
+  }
+
+  details.menu-opening .mobile-facets__close {
+    display: none !important;
+  }
+
+  .facets-container:has(.mobile-facets__disclosure[open]),
+  #main-collection-filters:has(.mobile-facets__disclosure[open]) {
+    transform: none !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+  }
+}
+
 /* Price range filter: make From/To inputs clearly visible */
 .facets__price .field {
   background: #ffffff !important;
