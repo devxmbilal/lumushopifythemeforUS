@@ -28,7 +28,7 @@
       "type": "lumu-footer-products",
       "settings": {
         "title": "Trending Now",
-        "collection": "",
+        "collection": "tranding-viral-finds",
         "products_to_show": 4,
         "products_offset": 0,
         "button_label": "Shop All Products",
