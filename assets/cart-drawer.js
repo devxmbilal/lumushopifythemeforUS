@@ -71,6 +71,11 @@ class CartDrawer extends HTMLElement {
   }
 
   renderContents(parsedState) {
+    if (!parsedState?.sections) {
+      window.location = window.routes.cart_url;
+      return;
+    }
+
     this.querySelector('.drawer__inner').classList.contains('is-empty') &&
       this.querySelector('.drawer__inner').classList.remove('is-empty');
     this.productId = parsedState.id;
@@ -79,8 +84,9 @@ class CartDrawer extends HTMLElement {
         ? document.querySelector(section.selector)
         : document.getElementById(section.id);
 
-      if (!sectionElement) return;
-      sectionElement.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
+      const sectionHtml = parsedState.sections[section.id];
+      if (!sectionElement || !sectionHtml) return;
+      sectionElement.innerHTML = this.getSectionInnerHTML(sectionHtml, section.selector);
     });
 
     setTimeout(() => {

@@ -1,10 +1,16 @@
 class CartNotification extends HTMLElement {
   constructor() {
     super();
+    this.onBodyClick = this.handleBodyClick.bind(this);
+  }
+
+  connectedCallback() {
+    if (this._initialized) return;
+    this._initialized = true;
 
     this.notification = document.getElementById('cart-notification');
     this.header = document.querySelector('sticky-header');
-    this.onBodyClick = this.handleBodyClick.bind(this);
+    if (!this.notification) return;
 
     this.notification.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
     this.querySelectorAll('button[type="button"]').forEach((closeButton) =>
@@ -13,6 +19,7 @@ class CartNotification extends HTMLElement {
   }
 
   open() {
+    if (!this.notification) return;
     this.notification.classList.add('animate', 'active');
 
     this.notification.addEventListener(
@@ -28,6 +35,7 @@ class CartNotification extends HTMLElement {
   }
 
   close() {
+    if (!this.notification) return;
     this.notification.classList.remove('active');
     document.body.removeEventListener('click', this.onBodyClick);
 
@@ -35,12 +43,18 @@ class CartNotification extends HTMLElement {
   }
 
   renderContents(parsedState) {
+    if (!parsedState?.sections) {
+      window.location = window.routes.cart_url;
+      return;
+    }
+
     this.cartItemKey = parsedState.key;
     this.getSectionsToRender().forEach((section) => {
-      document.getElementById(section.id).innerHTML = this.getSectionInnerHTML(
-        parsedState.sections[section.id],
-        section.selector
-      );
+      const target = document.getElementById(section.id);
+      const sectionHtml = parsedState.sections[section.id];
+      if (!target || !sectionHtml) return;
+
+      target.innerHTML = this.getSectionInnerHTML(sectionHtml, section.selector);
     });
 
     if (this.header) this.header.reveal();
