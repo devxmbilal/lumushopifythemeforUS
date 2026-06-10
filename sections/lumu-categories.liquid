@@ -30,7 +30,7 @@
     transition: transform 0.5s ease;
   }
   .lumu-cat-card:hover .lumu-cat-card__img { transform: scale(1.05); }
-  .lumu-cat-card__img-wrap { overflow: hidden; }
+  .lumu-cat-card__img-wrap { overflow: hidden; position: relative; }
   .lumu-cat-card__body { padding: 20px; text-align: center; }
   .lumu-cat-card__icon {
     width: 40px; height: 40px; margin: 0 auto 10px;
@@ -99,6 +99,7 @@
                 No Image
               </div>
             {%- endif -%}
+            {% render 'lumu-brand-watermark', size: 'card' %}
           </div>
           <div class="lumu-cat-card__body">
             <div class="lumu-cat-card__icon">
@@ -128,6 +129,7 @@
       <a href="{{ routes.collections_url }}/tech-smart-gadgets" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu-hero-2.png' | asset_url }}" alt="Tech & Smart Gadgets" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -143,6 +145,7 @@
       <a href="{{ routes.collections_url }}/home-kitchen-essentials" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu_curated_excellence.png' | asset_url }}" alt="Home & Kitchen Essentials" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -158,6 +161,7 @@
       <a href="{{ routes.collections_url }}/health-beauty" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu-hero-1.png' | asset_url }}" alt="Health & Beauty" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -173,6 +177,7 @@
       <a href="{{ routes.collections_url }}/premium-fashion-accessories" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu-cat-women.png' | asset_url }}" alt="Premium Fashion Accessories" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -188,6 +193,7 @@
       <a href="{{ routes.collections_url }}/trending-viral-finds" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu-cat-men.png' | asset_url }}" alt="Trending & Viral Finds" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">
@@ -203,6 +209,7 @@
       <a href="{{ routes.all_products_collection_url }}" class="lumu-cat-card">
         <div class="lumu-cat-card__img-wrap">
           <img src="{{ 'lumu-hero-3.png' | asset_url }}" alt="Flash Deals" class="lumu-cat-card__img" loading="lazy" width="600" height="450">
+          {% render 'lumu-brand-watermark', size: 'card' %}
         </div>
         <div class="lumu-cat-card__body">
           <div class="lumu-cat-card__icon">

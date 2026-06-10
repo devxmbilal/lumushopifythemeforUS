@@ -3692,9 +3692,11 @@ summary.header__menu-item span {
   max-width: 82px;
 }
 
-.lumu-pfp__card-img-wrap .lumu-brand-watermark {
+.lumu-pfp__card-img-wrap .lumu-brand-watermark,
+.lumu-cat-card__img-wrap .lumu-brand-watermark {
   bottom: 10px;
   right: 10px;
+  z-index: 4;
 }
 
 .lumu-gallery-viewer {
