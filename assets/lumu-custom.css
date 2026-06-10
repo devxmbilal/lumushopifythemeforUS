@@ -3655,6 +3655,52 @@ summary.header__menu-item span {
   }
 }
 
+/* Lumu brand watermark on product images */
+.lumu-brand-watermark {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.94);
+  padding: 4px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(97, 83, 167, 0.12);
+}
+
+.lumu-brand-watermark img {
+  display: block;
+  height: 14px;
+  width: auto;
+  max-width: 54px;
+  object-fit: contain;
+}
+
+.lumu-brand-watermark--gallery {
+  bottom: 16px;
+  right: 16px;
+  padding: 6px 12px;
+  border-radius: 10px;
+}
+
+.lumu-brand-watermark--gallery img {
+  height: 22px;
+  max-width: 82px;
+}
+
+.lumu-pfp__card-img-wrap .lumu-brand-watermark {
+  bottom: 10px;
+  right: 10px;
+}
+
+.lumu-gallery-viewer {
+  position: relative !important;
+}
+
 /* 2. Main Featured Media Overlays (Halal Certified & Wishlist Icon) */
 media-gallery {
   position: relative !important;

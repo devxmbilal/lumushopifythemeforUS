@@ -1,0 +1,17 @@
+{% comment %}
+  Lumu logo branding overlay for product images.
+
+  Accepts:
+  - size: {String} 'card' or 'gallery' (optional)
+{% endcomment %}
+{%- assign watermark_size = size | default: 'card' -%}
+<div class="lumu-brand-watermark lumu-brand-watermark--{{ watermark_size }}" aria-hidden="true">
+  <img
+    src="{{ 'lumulogo.png' | asset_url }}"
+    alt=""
+    width="80"
+    height="28"
+    loading="lazy"
+    decoding="async"
+  >
+</div>
