@@ -1578,7 +1578,7 @@ html {
 
 @media (max-width: 549px) {
   .lumu-pfp__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 
@@ -4399,3 +4399,12 @@ quantity-input.quantity .quantity__input {
 }
 
 
+
+
+/* Trending Now 2 columns on Mobile */
+@media screen and (max-width: 767px) {
+  .lumu-pfp__grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
